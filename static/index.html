@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CERBERUS-X | Offline Evidence Digital Twin</title>
+  <style>
+    :root {
+      --bg-app: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --border-card: #E2E8F0;
+      --text-main: #1E293B;
+      --text-muted: #64748B;
+      --mint-bg: #DCFCE7;
+      --mint-text: #166534;
+      --mint-border: #86EFAC;
+      --amber-bg: #FEF3C7;
+      --amber-text: #92400E;
+      --amber-border: #FCD34D;
+      --slate-bg: #F1F5F9;
+      --slate-text: #334155;
+      --slate-border: #CBD5E1;
+      --coral-bg: #FEE2E2;
+      --coral-text: #991B1B;
+      --coral-border: #FCA5A5;
+      --tape-yellow: #FDE047;
+      --tape-dark: #1E293B;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg-app);
+      color: var(--text-main);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Compact Left Menu Bar */
+    .sidebar {
+      width: 215px;
+      background: var(--bg-card);
+      border-right: 1px solid var(--border-card);
+      padding: 20px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      flex-shrink: 0;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 1.25rem;
+      letter-spacing: 0.5px;
+    }
+
+    .brand span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .nav-list {
+      display: grid;
+      gap: 6px;
+      margin-top: 22px;
+    }
+
+    .nav-item {
+      display: block;
+      text-decoration: none;
+      color: var(--text-main);
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 9px 12px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+    }
+
+    .nav-item:hover {
+      background: var(--slate-bg);
+      border-color: var(--slate-border);
+    }
+
+    .sidebar-footer {
+      display: grid;
+      gap: 10px;
+    }
+
+    .pill-offline {
+      background: var(--mint-bg);
+      color: var(--mint-text);
+      border: 1px solid var(--mint-border);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .mode-switch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--slate-bg);
+      padding: 3px;
+      border-radius: 9px;
+      border: 1px solid var(--slate-border);
+    }
+
+    .mode-btn {
+      border: none;
+      background: transparent;
+      padding: 6px 4px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .mode-btn.active {
+      background: var(--bg-card);
+      color: var(--text-main);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    }
+
+    .main-wrap {
+      flex: 1;
+      padding: 22px 26px;
+      overflow-y: auto;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      gap: 18px;
+    }
+
+    /* Top Stat Cards */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+      }
+      .stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .stat-card {
+      border-radius: 14px;
+      padding: 15px;
+      text-align: center;
+      border: 1px solid var(--border-card);
+    }
+
+    .stat-label {
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      opacity: 0.85;
+    }
+
+    .stat-value {
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin: 5px 0 2px;
+    }
+
+    .stat-sub {
+      font-size: 0.78rem;
+      opacity: 0.85;
+    }
+
+    .stat-mint {
+      background: var(--mint-bg);
+      border-color: var(--mint-border);
+      color: var(--mint-text);
+    }
+
+    .stat-amber {
+      background: var(--amber-bg);
+      border-color: var(--amber-border);
+      color: var(--amber-text);
+    }
+
+    .stat-coral {
+      background: var(--coral-bg);
+      border-color: var(--coral-border);
+      color: var(--coral-text);
+    }
+
+    .stat-slate {
+      background: var(--slate-bg);
+      border-color: var(--slate-border);
+      color: var(--slate-text);
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 20px 22px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    /* Radial Digital Twin Mind Map */
+    .mindmap-stage {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      background: radial-gradient(circle at center, #FFFFFF 0%, #F8FAFC 70%, #F1F5F9 100%);
+      border: 1px solid var(--border-card);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .mindmap-lines {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .mindmap-center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 195px;
+      height: 195px;
+      border-radius: 50%;
+      background: #1E293B;
+      color: #FFFFFF;
+      border: 6px solid #E2E8F0;
+      box-shadow: 0 10px 25px rgba(30, 41, 59, 0.16);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px;
+      z-index: 3;
+      cursor: pointer;
+    }
+
+    .mindmap-center .hub-tag {
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      color: #86EFAC;
+      text-transform: uppercase;
+    }
+
+    .mindmap-center .hub-title {
+      font-size: 1.02rem;
+      font-weight: 800;
+      margin: 4px 0;
+    }
+
+    .mindmap-center .hub-sub {
+      font-size: 0.74rem;
+      color: #CBD5E1;
+      line-height: 1.3;
+    }
+
+    .mind-node {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      width: 210px;
+      border-radius: 14px;
+      padding: 11px 13px;
+      border: 2px solid var(--border-card);
+      background: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      z-index: 2;
+    }
+
+    .mind-node:hover,
+    .mind-node.selected {
+      transform: translate(-50%, -50%) scale(1.05);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.14);
+      z-index: 4;
+    }
+
+    .mind-node.mint {
+      background: var(--mint-bg);
+      border-color: var(--mint-border);
+      color: var(--mint-text);
+    }
+
+    .mind-node.amber {
+      background: var(--amber-bg);
+      border-color: var(--amber-border);
+      color: var(--amber-text);
+    }
+
+    .mind-node.coral {
+      background: var(--coral-bg);
+      border-color: var(--coral-border);
+      color: var(--coral-text);
+    }
+
+    .node-pill {
+      display: inline-block;
+      font-size: 0.66rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .node-title {
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: #1E293B;
+    }
+
+    .node-desc {
+      font-size: 0.76rem;
+      margin-top: 3px;
+      line-height: 1.3;
+      color: #334155;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .node-inspector {
+      margin-top: 12px;
+      padding: 13px 16px;
+      border-radius: 12px;
+      background: var(--slate-bg);
+      border: 1px solid var(--slate-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Q&A & Controls */
+    .preset-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 12px;
+    }
+
+    .preset-btn {
+      background: var(--slate-bg);
+      border: 1px solid var(--slate-border);
+      color: var(--slate-text);
+      padding: 7px 11px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+
+    .preset-btn:hover {
+      background: #E2E8F0;
+    }
+
+    .preset-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .query-bar {
+      display: flex;
+      gap: 10px;
+    }
+
+    .query-bar input {
+      flex: 1;
+      padding: 12px 14px;
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      font-size: 0.95rem;
+    }
+
+    .primary-btn {
+      background: #334155;
+      color: #FFFFFF;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .verdict-banner {
+      padding: 16px 20px;
+      border-radius: 12px;
+      border: 1px solid;
+    }
+
+    .verdict-SUPPORTED {
+      background: var(--mint-bg);
+      color: var(--mint-text);
+      border-color: var(--mint-border);
+    }
+
+    .verdict-CONFLICTED {
+      background: var(--amber-bg);
+      color: var(--amber-text);
+      border-color: var(--amber-border);
+    }
+
+    .verdict-INSUFFICIENT {
+      background: var(--slate-bg);
+      color: var(--slate-text);
+      border-color: var(--slate-border);
+    }
+
+    .verdict-QUARANTINED {
+      background: var(--coral-bg);
+      color: var(--coral-text);
+      border-color: var(--coral-border);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    .sub-card {
+      border-radius: 12px;
+      padding: 15px;
+      border: 1px solid var(--border-card);
+    }
+
+    .sub-mint {
+      background: var(--mint-bg);
+      color: var(--mint-text);
+      border-color: var(--mint-border);
+    }
+
+    .sub-amber {
+      background: var(--amber-bg);
+      color: var(--amber-text);
+      border-color: var(--amber-border);
+    }
+
+    .sub-slate {
+      background: var(--slate-bg);
+      color: var(--slate-text);
+      border-color: var(--slate-border);
+    }
+
+    .quarantine-box {
+      background: var(--coral-bg);
+      color: var(--coral-text);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--coral-border);
+      margin-top: 14px;
+    }
+
+    .crime-tape {
+      background: repeating-linear-gradient(
+        -45deg,
+        var(--tape-yellow),
+        var(--tape-yellow) 14px,
+        var(--tape-dark) 14px,
+        var(--tape-dark) 28px
+      );
+      color: #FFFFFF;
+      text-shadow: 0 1px 2px #000;
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      padding: 6px 14px;
+    }
+
+    .quarantine-body {
+      padding: 14px 18px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--border-card);
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div>
+      <div class="brand">
+        <h1>CERBERUS-X</h1>
+        <span>Offline Evidence Twin</span>
+      </div>
+      <nav class="nav-list">
+        <a href="#twinSection" class="nav-item">Digital Twin Mind Map</a>
+        <a href="#qaSection" class="nav-item">Evidence Q&amp;A</a>
+        <a href="#forensicSection" class="nav-item" onclick="setMode('forensic')">Forensic Audit</a>
+      </nav>
+    </div>
+    <div class="sidebar-footer">
+      <div class="mode-switch">
+        <button id="btnSimple" class="mode-btn active" onclick="setMode('simple')">Simple</button>
+        <button id="btnForensic" class="mode-btn" onclick="setMode('forensic')">Forensic</button>
+      </div>
+      <div class="pill-offline">100% Offline Ready</div>
+    </div>
+  </aside>
+
+  <div class="main-wrap">
+    <main class="container">
+      <!-- Top 4 Pastel Stat Cards -->
+      <section class="stat-grid">
+        <div class="stat-card stat-mint">
+          <div class="stat-label">Verified Sources</div>
+          <div id="statVerified" class="stat-value">-</div>
+          <div id="statDocsSub" class="stat-sub">Ingested offline</div>
+        </div>
+        <div class="stat-card stat-amber">
+          <div class="stat-label">Conflicts &amp; Timelines</div>
+          <div id="statConflicts" class="stat-value">-</div>
+          <div class="stat-sub">Cross-modal &amp; temporal</div>
+        </div>
+        <div class="stat-card stat-coral">
+          <div class="stat-label">Quarantined Files</div>
+          <div id="statQuarantined" class="stat-value">-</div>
+          <div class="stat-sub">Crime Scene Tape locked</div>
+        </div>
+        <div class="stat-card stat-slate">
+          <div class="stat-label">Duplicates Filtered</div>
+          <div id="statDuplicates" class="stat-value">-</div>
+          <div class="stat-sub">Discounted from trust</div>
+        </div>
+      </section>
+
+      <!-- Radial Digital Twin Mind Map -->
+      <section id="twinSection" class="card">
+        <div class="card-header">
+          <h2 class="card-title">Evidence Digital Twin Mind Map — All Topics Connected at Core Hub</h2>
+          <span id="twinCountBadge" style="font-size:0.82rem; color:var(--text-muted);">Building mind map...</span>
+        </div>
+
+        <div id="mindmapStage" class="mindmap-stage">
+          <svg id="mindmapLines" class="mindmap-lines" viewBox="0 0 1000 500" preserveAspectRatio="none"></svg>
+          <div class="mindmap-center" onclick="resetInspector()">
+            <span class="hub-tag">Canonical Core</span>
+            <div class="hub-title">EVIDENCE TWIN</div>
+            <div id="hubStatsText" class="hub-sub">Connecting all CSV, PDF, TXT &amp; OCR entities</div>
+          </div>
+          <div id="mindmapNodesLayer"></div>
+        </div>
+
+        <div id="nodeInspector" class="node-inspector">
+          <div>
+            <strong id="inspTitle">Click any topic node in the mind map to inspect its cross-modal state</strong>
+            <div id="inspBody" style="font-size:0.84rem; color:var(--text-muted); margin-top:3px;">
+              All entity records, timeline shifts, conflicts, and quarantined files radiate from the central Evidence Twin core.
+            </div>
+          </div>
+          <button id="inspAskBtn" class="preset-btn hidden" onclick="querySelectedNode()">Verify This Topic in Q&amp;A</button>
+        </div>
+      </section>
+
+      <!-- Evidence Q&A & File Upload -->
+      <section id="qaSection" class="card">
+        <div class="card-header">
+          <h2 class="card-title">Ask &amp; Verify Across Modalities</h2>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <input type="file" id="fileInput" multiple style="font-size:0.82rem;" />
+            <button class="preset-btn" onclick="uploadFiles(this)">Upload Files</button>
+            <button class="preset-btn" onclick="resetDemo()">Reset Demo</button>
+          </div>
+        </div>
+        <div id="presetRow" class="preset-row"></div>
+        <div class="query-bar">
+          <input id="questionInput" type="text" placeholder="Ask a question across ingested CSV, PDF, TXT, and OCR records..." />
+          <button class="primary-btn" onclick="submitQuestion()">Verify Evidence</button>
+        </div>
+      </section>
+
+      <!-- Verdict & Evidence Breakdown -->
+      <section id="resultSection" class="card hidden">
+        <div id="verdictBanner" class="verdict-banner"></div>
+        <div id="quarantineContainer"></div>
+        <div class="grid-3" style="margin-top:16px;">
+          <div class="sub-card sub-mint">
+            <strong>Supporting Evidence &amp; Citations</strong>
+            <ul id="supportingList"></ul>
+          </div>
+          <div class="sub-card sub-amber">
+            <strong>Conflicting / Discrepant Evidence</strong>
+            <ul id="conflictingList"></ul>
+          </div>
+          <div class="sub-card sub-slate">
+            <strong>Missing / Needed Evidence</strong>
+            <ul id="missingList"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Forensic Audit Ledger -->
+      <section id="forensicSection" class="card hidden">
+        <div class="card-header">
+          <h2 class="card-title">Forensic Provenance, Detected Conflicts &amp; SHA-256 Ledger</h2>
+        </div>
+        <table>
+          <thead>
+            <tr style="color:var(--text-muted);">
+              <th>Source File</th>
+              <th>Modality</th>
+              <th>SHA-256</th>
+              <th>Security &amp; Trust Status</th>
+            </tr>
+          </thead>
+          <tbody id="docAuditBody"></tbody>
+        </table>
+        <h3 style="font-size:0.98rem; margin:18px 0 8px;">All Detected Conflicts &amp; Timeline Classifications</h3>
+        <ul id="allConflictsList" style="font-size:0.88rem;"></ul>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    let currentMindNodes = [];
+    let selectedTopicName = "";
+
+    window.addEventListener("DOMContentLoaded", loadDashboard);
+
+    async function loadDashboard() {
+      const res = await fetch("/api/dashboard");
+      renderDashboard(await res.json());
+    }
+
+    function renderDashboard(data) {
+      const s = data.stats || {};
+      document.getElementById("statVerified").textContent = `${s.verified_docs ?? 0} / ${s.total_docs ?? 0}`;
+      document.getElementById("statDocsSub").textContent = `${s.entities_count ?? 0} Entities • ${s.claims_count ?? 0} Claims`;
+      document.getElementById("statConflicts").textContent = s.active_conflicts ?? 0;
+      document.getElementById("statQuarantined").textContent = s.quarantined_count ?? 0;
+      document.getElementById("statDuplicates").textContent = s.duplicate_count ?? 0;
+
+      document.getElementById("hubStatsText").textContent =
+        `${s.entities_count ?? 0} Topics • ${s.claims_count ?? 0} Claims • ${s.active_conflicts ?? 0} Conflicts`;
+
+      buildMindMap(data);
+
+      document.getElementById("presetRow").innerHTML = (data.questions || []).map(q => `
+        <button class="preset-btn" onclick="askPreset(${JSON.stringify(q.question).replace(/"/g, '&quot;')})">
+          ${q.id.toUpperCase()}: ${q.question}
+        </button>
+      `).join("");
+
+      document.getElementById("docAuditBody").innerHTML = (data.documents || []).map(d => `
+        <tr style="${d.quarantined ? 'background:#FEE2E2; color:#991B1B;' : ''}">
+          <td><code>${d.filename}</code></td>
+          <td>${d.modality}</td>
+          <td><code>${d.sha256}</code></td>
+          <td>${d.status}</td>
+        </tr>
+      `).join("");
+
+      document.getElementById("allConflictsList").innerHTML = (data.conflicts || []).map(c =>
+        `<li style="margin-bottom:6px;"><strong>[${c.type.toUpperCase()}]</strong> ${c.explanation}</li>`
+      ).join("") || "<li>No conflicts detected.</li>";
+    }
+
+    function buildMindMap(data) {
+      const twins = data.twins || [];
+      const conflicts = data.conflicts || [];
+      const quarantinedDocs = (data.documents || []).filter(d => d.quarantined);
+
+      const nodes = twins.map(t => {
+        const nameLower = (t.entity_name || "").toLowerCase();
+        const relatedConflict = conflicts.find(c => c.explanation.toLowerCase().includes(nameLower));
+        const isQuarantined = nameLower.includes("2201") || (t.summary || "").toLowerCase().includes("quarantine");
+        let tone = "mint";
+        if (isQuarantined) tone = "coral";
+        else if ((t.anomalies && t.anomalies.length) || relatedConflict) tone = "amber";
+
+        return {
+          title: t.entity_name,
+          badge: `${t.stage} • ${tone === "coral" ? "QUARANTINED" : tone === "amber" ? "ALERT" : "VERIFIED"}`,
+          summary: t.summary,
+          detail: relatedConflict ? `${t.summary} — Alert: ${relatedConflict.explanation}` : t.summary,
+          tone: tone
+        };
+      });
+
+      quarantinedDocs.forEach(qd => {
+        if (!nodes.some(n => n.tone === "coral")) {
+          nodes.push({
+            title: qd.filename,
+            badge: "QUARANTINED FILE",
+            summary: qd.status,
+            detail: `${qd.filename} (${qd.modality}) was isolated by Crime Scene Tape sanitization before reaching the core graph.`,
+            tone: "coral"
+          });
+        }
+      });
+
+      currentMindNodes = nodes;
+      document.getElementById("twinCountBadge").textContent = `${nodes.length} Connected Topic Nodes`;
+
+      const svg = document.getElementById("mindmapLines");
+      const layer = document.getElementById("mindmapNodesLayer");
+      svg.innerHTML = "";
+      layer.innerHTML = "";
+
+      const count = Math.max(nodes.length, 1);
+      const cx = 500;
+      const cy = 250;
+      const rx = 345;
+      const ry = 175;
+
+      nodes.forEach((node, idx) => {
+        const angle = (-Math.PI / 2) + (idx * (2 * Math.PI / count));
+        const nx = cx + rx * Math.cos(angle);
+        const ny = cy + ry * Math.sin(angle);
+
+        const strokeColor = node.tone === "coral" ? "#EF4444" : node.tone === "amber" ? "#F59E0B" : "#22C55E";
+        const dash = node.tone === "coral" ? 'stroke-dasharray="6,5"' : "";
+        const ctrlX = (cx + nx) / 2;
+        const ctrlY = cy;
+
+        svg.innerHTML += `
+          <path d="M ${cx} ${cy} Q ${ctrlX} ${ctrlY}, ${nx} ${ny}"
+                fill="none" stroke="${strokeColor}" stroke-width="2.6" ${dash} opacity="0.85" />
+          <circle cx="${nx}" cy="${ny}" r="5" fill="${strokeColor}" />
+        `;
+
+        const leftPct = (nx / 1000) * 100;
+        const topPct = (ny / 500) * 100;
+
+        const el = document.createElement("div");
+        el.className = `mind-node ${node.tone}`;
+        el.style.left = `${leftPct}%`;
+        el.style.top = `${topPct}%`;
+        el.innerHTML = `
+          <span class="node-pill">${node.badge}</span>
+          <div class="node-title">${node.title}</div>
+          <div class="node-desc">${node.summary}</div>
+        `;
+        el.onclick = () => selectMindNode(idx, el);
+        layer.appendChild(el);
+      });
+    }
+
+    function selectMindNode(idx, el) {
+      document.querySelectorAll(".mind-node").forEach(n => n.classList.remove("selected"));
+      el.classList.add("selected");
+      const node = currentMindNodes[idx];
+      selectedTopicName = node.title;
+      document.getElementById("inspTitle").textContent = `${node.title} (${node.badge})`;
+      document.getElementById("inspBody").textContent = node.detail;
+      document.getElementById("inspAskBtn").classList.remove("hidden");
+    }
+
+    function resetInspector() {
+      document.querySelectorAll(".mind-node").forEach(n => n.classList.remove("selected"));
+      selectedTopicName = "";
+      document.getElementById("inspTitle").textContent = "Core Evidence Twin Hub — All Topics Unified";
+      document.getElementById("inspBody").textContent = "Click any outer node to inspect its cross-modal claims, timeline changes, or conflict alerts.";
+      document.getElementById("inspAskBtn").classList.add("hidden");
+    }
+
+    function querySelectedNode() {
+      if (!selectedTopicName) return;
+      const q = `What is the verified status and evidence for ${selectedTopicName}?`;
+      document.getElementById("questionInput").value = q;
+      submitQuestion();
+      document.getElementById("qaSection").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function setMode(mode) {
+      document.getElementById("btnSimple").classList.toggle("active", mode === "simple");
+      document.getElementById("btnForensic").classList.toggle("active", mode === "forensic");
+      document.getElementById("forensicSection").classList.toggle("hidden", mode !== "forensic");
+    }
+
+    function askPreset(q) {
+      document.getElementById("questionInput").value = q;
+      submitQuestion();
+    }
+
+    async function uploadFiles(btn) {
+      const input = document.getElementById("fileInput");
+      if (!input.files.length) return alert("Select files first.");
+      const oldText = btn.textContent;
+      btn.textContent = "Processing...";
+      btn.disabled = true;
+      try {
+        const fd = new FormData();
+        for (const f of input.files) fd.append("files", f);
+        const res = await fetch("/api/upload", { method: "POST", body: fd });
+        if (!res.ok) {
+          const errText = await res.text();
+          alert("Upload failed (" + res.status + "): " + errText);
+          return;
+        }
+        const data = await res.json();
+        renderDashboard(data.dashboard);
+        alert("Uploaded & added to Mind Map: " + data.uploaded.join(", "));
+      } catch (err) {
+        alert("Upload error: " + err.message);
+      } finally {
+        btn.textContent = oldText;
+        btn.disabled = false;
+      }
+    }
+
+    async function resetDemo() {
+      const res = await fetch("/api/reset-demo", { method: "POST" });
+      renderDashboard(await res.json());
+      resetInspector();
+    }
+
+    async function submitQuestion() {
+      const q = document.getElementById("questionInput").value.trim();
+      if (!q) return;
+      const res = await fetch("/api/ask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: q })
+      });
+      renderResult(await res.json());
+    }
+
+    function renderResult(data) {
+      document.getElementById("resultSection").classList.remove("hidden");
+      const banner = document.getElementById("verdictBanner");
+      banner.className = "verdict-banner verdict-" + data.verdict;
+      banner.innerHTML = `
+        <div style="font-size:0.78rem; font-weight:800;">VERDICT: ${data.verdict}</div>
+        <div style="font-size:1.06rem; font-weight:700; margin:6px 0;">${data.summary}</div>
+        <div style="font-size:0.9rem;">${data.explanation}</div>
+      `;
+      document.getElementById("quarantineContainer").innerHTML = (data.quarantined || []).map(item => `
+        <div class="quarantine-box">
+          <div class="crime-tape">CRIME SCENE QUARANTINE — HIDDEN INSTRUCTION BLOCKED</div>
+          <div class="quarantine-body"><strong>${item.file}</strong>: ${item.reason}<br/><code style="font-size:0.82rem;">${item.hidden_text}</code></div>
+        </div>
+      `).join("");
+      fillList("supportingList", data.supporting, "None");
+      fillList("conflictingList", data.conflicting, "No unresolved conflicts");
+      fillList("missingList", data.missing, "No missing records flagged");
+    }
+
+    function fillList(id, items, emptyText) {
+      document.getElementById(id).innerHTML = (items && items.length)
+        ? items.map(i => `<li style="margin-top:6px; font-size:0.88rem;">${i}</li>`).join("")
+        : `<li style="margin-top:6px; font-size:0.88rem; opacity:0.75;">${emptyText}</li>`;
+    }
+  </script>
+</body>
+</html>
