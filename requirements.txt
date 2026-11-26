@@ -1,8 +1,11 @@
 streamlit>=1.35
+<<<<<<< HEAD
 fastapi>=0.165
 uvicorn>=0.40
 python-multipart>=0.0.20
 httpx>=0.28
+=======
+>>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
 networkx>=3.2
 pydantic>=2.6
 rapidfuzz>=3.6

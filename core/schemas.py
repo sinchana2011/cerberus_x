@@ -5,10 +5,13 @@ answers) is defined here so modules stay decoupled and results can be saved
 to / loaded from JSON.
 
 Key invariant: a claim flagged ``suspicious`` is never ``VERIFIED``.
+<<<<<<< HEAD
 
 Batch 3 additions (all optional / defaulted, so Batch 1-2 code is unaffected):
   Claim.reliability, Conflict.rule, Citation.claim_id,
   TwinState.source_filename, TwinState.locator, Answer.excluded_claim_ids.
+=======
+>>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
 """
 from __future__ import annotations
 
@@ -49,8 +52,11 @@ class FileType(str, Enum):
     PDF = "pdf"
     IMAGE = "image"
     CSV = "csv"
+<<<<<<< HEAD
     EXCEL = "excel"
     JSON = "json"
+=======
+>>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
     TEXT = "text"
     UNKNOWN = "unknown"
 
@@ -86,10 +92,17 @@ class WorkflowStage(str, Enum):
 
 class ClaimStatus(str, Enum):
     UNVERIFIED = "unverified"   # extracted, not yet assessed
+<<<<<<< HEAD
     VERIFIED = "verified"       # assessed, uncontradicted, sufficiently reliable source
     DISPUTED = "disputed"       # part of a true conflict
     SUPERSEDED = "superseded"   # replaced by a later state (temporal change)
     DUPLICATE = "duplicate"     # repeats another claim from the same source
+=======
+    VERIFIED = "verified"       # assessed, uncontested or best-supported
+    DISPUTED = "disputed"       # part of a true conflict
+    SUPERSEDED = "superseded"   # replaced by a later state (temporal change)
+    DUPLICATE = "duplicate"     # repeats another claim
+>>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
     SUSPICIOUS = "suspicious"   # from hidden text / injection; never a fact
 
 
@@ -199,7 +212,11 @@ class Claim(BaseModel):
     source_label: Optional[str] = None       # e.g. CSV 'source' column value
     entity_name: str                         # as written in the source
     entity_id: Optional[str] = None          # filled by the entity resolver
+<<<<<<< HEAD
     predicate: str                           # e.g. "quantity", "role:ceo", "departed"
+=======
+    predicate: str                           # e.g. "quantity", "role:CEO", "departed"
+>>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
     value: str
     value_num: Optional[float] = None
     unit: Optional[str] = None
@@ -210,7 +227,10 @@ class Claim(BaseModel):
     locator: Optional[str] = None            # "page 1", "row 3", "line 12"
     suspicious: bool = False
     status: ClaimStatus = ClaimStatus.UNVERIFIED
+<<<<<<< HEAD
     reliability: float = Field(default=0.0, ge=0.0, le=1.0)   # set by the reasoner (Batch 3)
+=======
+>>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
 
     @field_validator("event_time")
     @classmethod
@@ -239,7 +259,10 @@ class Citation(BaseModel):
     snippet: str
     locator: Optional[str] = None
     reliability: float = Field(default=0.0, ge=0.0, le=1.0)
+<<<<<<< HEAD
     claim_id: Optional[str] = None
+=======
+>>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
 
 
 class Conflict(BaseModel):
@@ -251,7 +274,10 @@ class Conflict(BaseModel):
     explanation: str
     severity: Severity = Severity.MEDIUM
     needs_review: bool = False
+<<<<<<< HEAD
     rule: str = ""                           # the deterministic rule that produced this
+=======
+>>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
 
     @property
     def is_real_problem(self) -> bool:
@@ -275,8 +301,11 @@ class TwinState(BaseModel):
     source_id: str
     status: ClaimStatus = ClaimStatus.UNVERIFIED
     reliability: float = Field(default=0.0, ge=0.0, le=1.0)
+<<<<<<< HEAD
     source_filename: Optional[str] = None
     locator: Optional[str] = None
+=======
+>>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
 
     @field_validator("valid_from", "valid_to")
     @classmethod
@@ -291,7 +320,10 @@ class Answer(BaseModel):
     confidence: float = Field(default=0.0, ge=0.0, le=1.0)
     citations: list[Citation] = Field(default_factory=list)
     conflict_ids: list[str] = Field(default_factory=list)
+<<<<<<< HEAD
     excluded_claim_ids: list[str] = Field(default_factory=list)  # suspicious, not used
+=======
+>>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
     used_llm: bool = False
     notes: list[str] = Field(default_factory=list)
 

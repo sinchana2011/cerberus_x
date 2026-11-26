@@ -122,6 +122,7 @@ def test_save_upload_is_safe_and_does_not_overwrite(tmp_path):
     first = save_upload("../../evil name?.txt", b"x", dest)
     second = save_upload("../../evil name?.txt", b"y", dest)
     assert first.parent == dest and ".." not in first.name
+<<<<<<< HEAD
     assert second != first and second.read_bytes() == b"y"
 
 
@@ -220,3 +221,6 @@ def test_invalid_json_reports_error(tmp_path):
     p.write_text("{broken", encoding="utf-8")
     r = extract_file(p)
     assert not r.ok and "JSON could not be parsed" in r.error
+=======
+    assert second != first and second.read_bytes() == b"y"
+>>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
