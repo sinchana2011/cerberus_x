@@ -1,0 +1,47 @@
+[
+  {
+    "id": "q1",
+    "case": 1,
+    "question": "How many units of Shipment SH-1042 were dispatched?"
+  },
+  {
+    "id": "q2",
+    "case": 2,
+    "question": "How many units of PO-7781 were ordered, and how many were dispatched?"
+  },
+  {
+    "id": "q3a",
+    "case": 3,
+    "question": "Who is the CEO of Northwind Logistics?"
+  },
+  {
+    "id": "q3b",
+    "case": 3,
+    "question": "Who was the CEO of Northwind Logistics in 2024?"
+  },
+  {
+    "id": "q4",
+    "case": 4,
+    "question": "How many units of Shipment SH-2201 were delivered?"
+  },
+  {
+    "id": "q5a",
+    "case": 5,
+    "question": "Did Truck TR-55 arrive in Pune before it departed Mumbai?"
+  },
+  {
+    "id": "q5b",
+    "case": 5,
+    "question": "Was Meera Das in Pune and Delhi at the same time on 2026-04-02?"
+  },
+  {
+    "id": "q5c",
+    "case": 5,
+    "question": "Can Meera Das have been in both Delhi and Pune in April 2026?"
+  },
+  {
+    "id": "q6",
+    "case": null,
+    "question": "Who is the CFO of Northwind Logistics?"
+  }
+]

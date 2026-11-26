@@ -1,0 +1,7 @@
+
+Employee Name: Rahul Sharma
+Employee ID: EMP101
+Company: ABC Technologies
+Salary: 87000
+Department: Engineering
+Employment Status: Active

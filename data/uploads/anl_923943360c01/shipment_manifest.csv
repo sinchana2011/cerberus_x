@@ -1,0 +1,2 @@
+shipment_id,item,batch_no,origin,destination,dispatch_date,expected_delivery,weight_kg,declared_value_inr,dispatch_supervisor
+SHP-9042,Cardiac Stents (Box of 500),BCH-2026-88,Bengaluru Hub,Mumbai Apollo Center,2026-11-18,2026-11-20,42.5,5000000,Rohan Kulkarni (EMP-407)

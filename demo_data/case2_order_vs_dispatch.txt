@@ -1,0 +1,8 @@
+Procurement Note - Purchase Order PO-7781
+Date: 2026-03-01
+Acme Corp ordered 100 units of valve kits on Purchase Order PO-7781 from Northwind Logistics.
+
+Dispatch Note - Purchase Order PO-7781
+Date: 2026-03-12
+Northwind Logistics dispatched 85 units on Purchase Order PO-7781.
+The remaining 15 units are backordered.

@@ -1,0 +1,4 @@
+record_id,source,entity,attribute,value,unit,timestamp,note
+R1,Warehouse System,Shipment SH-1042,quantity_dispatched,85,units,2026-03-10 14:00,Dispatch scan at dock 3
+R2,Courier Manifest,Shipment SH-1042,quantity_dispatched,100,units,2026-03-10 15:30,Manifest signed by driver
+R3,Warehouse System,Shipment SH-1042,quantity_dispatched,85,units,2026-03-10 14:00,Dispatch scan at dock 3

@@ -1,0 +1,31 @@
+{
+  "shipment_id": "SHP-9042",
+  "vehicle_id": "KA-01-HG-7721",
+  "sensor_readings": [
+    {
+      "timestamp": "2026-11-18T08:15:00Z",
+      "location": "Bengaluru Hub",
+      "lat": 12.9716,
+      "lon": 77.5946,
+      "cargo_weight_kg": 42.5,
+      "seal_status": "INTACT"
+    },
+    {
+      "timestamp": "2026-11-19T02:40:00Z",
+      "location": "Pune Outer Bypass Yard",
+      "lat": 18.5204,
+      "lon": 73.8567,
+      "cargo_weight_kg": 18.0,
+      "seal_status": "TAMPERED_OPEN"
+    },
+    {
+      "timestamp": "2026-11-19T03:05:00Z",
+      "location": "Pune Outer Bypass Yard",
+      "lat": 18.5204,
+      "lon": 73.8567,
+      "cargo_weight_kg": 18.0,
+      "seal_status": "RESEALED_MANUAL"
+    }
+  ],
+  "notes": "GPS transponder went offline after 03:05Z at Pune Outer Bypass Yard."
+}

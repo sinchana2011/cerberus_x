@@ -1,0 +1,45 @@
+{
+  "dataset_version": "1.0",
+  "entities_under_investigation": [
+    "SHP-9042",
+    "EMP-407"
+  ],
+  "contradictions": [
+    {
+      "id": "CON-001",
+      "entity": "SHP-9042",
+      "type": "WEIGHT_AND_INTEGRITY_CONFLICT",
+      "severity": "CRITICAL",
+      "description": "Signed Proof of Delivery PDF claims 42.5 kg delivered with INTACT seal in Mumbai on 2026-11-20, contradicting GPS telemetry JSON and Pune weighbridge PNG showing weight dropped to 18.0 kg with TAMPERED/BROKEN seal in Pune on 2026-11-19.",
+      "conflicting_sources": [
+        "delivery_receipt_signed.pdf",
+        "shipment_manifest.csv",
+        "telemetry_gps_log.json",
+        "checkpoint_weighbridge_slip.png"
+      ]
+    },
+    {
+      "id": "CON-002",
+      "entity": "EMP-407",
+      "type": "SPATIAL_ALIBI_CONFLICT_NOV_19",
+      "severity": "HIGH",
+      "description": "Rohan Kulkarni (EMP-407) claimed flight and hotel expenses in New Delhi on 2026-11-19 in expense_claims.xlsx, while biometric and RFID logs in gate_security_log.txt confirm physical entry/exit at Bengaluru Hub on 2026-11-19 (09:02 to 17:45).",
+      "conflicting_sources": [
+        "expense_claims.xlsx",
+        "gate_security_log.txt"
+      ]
+    },
+    {
+      "id": "CON-003",
+      "entity": "EMP-407",
+      "type": "SPATIAL_ALIBI_CONFLICT_NOV_20",
+      "severity": "HIGH",
+      "description": "On 2026-11-20, EMP-407 is recorded in three incompatible cities: Bengaluru Hub biometric entry at 08:30 (gate_security_log.txt), on-site delivery sign-off in Mumbai at 14:20 (delivery_receipt_signed.pdf), and a client dinner claim in New Delhi (expense_claims.xlsx).",
+      "conflicting_sources": [
+        "gate_security_log.txt",
+        "delivery_receipt_signed.pdf",
+        "expense_claims.xlsx"
+      ]
+    }
+  ]
+}

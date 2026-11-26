@@ -1,0 +1,9 @@
+=== BENGALURU WAREHOUSE ACCESS & BIOMETRIC LOG ===
+Date: 2026-11-18 to 2026-11-20
+Facility: Bengaluru Central Logistics Hub (Gate B)
+
+[2026-11-18 07:55:12] ENTRY | EMP-407 | Rohan Kulkarni | Biometric + RFID | Dispatch Bay 4
+[2026-11-18 19:10:44] EXIT  | EMP-407 | Rohan Kulkarni | RFID Badge
+[2026-11-19 09:02:18] ENTRY | EMP-407 | Rohan Kulkarni | Biometric + RFID | Vault & Seal Room
+[2026-11-19 17:45:03] EXIT  | EMP-407 | Rohan Kulkarni | RFID Badge
+[2026-11-20 08:30:00] ENTRY | EMP-407 | Rohan Kulkarni | Biometric + RFID | Admin Block
