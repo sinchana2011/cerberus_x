@@ -1,0 +1,5 @@
+2026-10-14 08:30 INFO [GATE-BLR-03] RFID scan Shipment SHP-2048 Vehicle VH-19 weight=4200kg
+2026-10-14 11:00 INFO [GATE-BLR-01] Shipment SHP-2048 checkpoint scan at Bengaluru Hub
+2026-10-14 14:00 INFO [GATE-BLR-EXIT] Vehicle VH-19 departed Bengaluru on 2026-10-14 at 14:00
+2026-10-14 15:45 WARN [GATE-BLR-EXIT] Secondary dispatch timestamp logged 2026-10-14 15:45 for SHP-2048
+2026-10-14 09:30 ERROR [GATE-HYD-IN] Vehicle VH-19 arrived in Hyderabad on 2026-10-14 at 09:30

@@ -18,13 +18,13 @@ function SourceClaimCard({
 }) {
   if (!claim) {
     return (
-      <Card className="border-slate-800/80">
-        <CardContent className="p-5 text-xs text-slate-500">No claim record available.</CardContent>
+      <Card>
+        <CardContent className="p-5 text-xs text-[#77736A]">No claim record available.</CardContent>
       </Card>
     );
   }
   return (
-    <Card className="border-slate-800 bg-[#091533]">
+    <Card>
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <Badge variant="info">{label}</Badge>
@@ -39,22 +39,22 @@ function SourceClaimCard({
       </CardHeader>
       <CardContent className="space-y-3 text-xs">
         <div className="grid grid-cols-2 gap-2">
-          <div className="rounded-lg border border-slate-800 bg-[#060e23] p-2.5">
-            <div className="text-[10px] uppercase text-slate-500">Claimed Value</div>
-            <div className="mt-0.5 font-mono text-sm font-semibold text-cyan-300">
+          <div className="rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] p-2.5">
+            <div className="text-[10px] uppercase text-[#77736A]">Claimed Value</div>
+            <div className="mt-0.5 font-mono text-sm font-semibold text-[#C87620]">
               {claim.value} {claim.unit ?? ""}
             </div>
           </div>
-          <div className="rounded-lg border border-slate-800 bg-[#060e23] p-2.5">
-            <div className="text-[10px] uppercase text-slate-500">Timestamp</div>
-            <div className="mt-0.5 font-mono text-slate-200">
+          <div className="rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] p-2.5">
+            <div className="text-[10px] uppercase text-[#77736A]">Timestamp</div>
+            <div className="mt-0.5 font-mono text-[#292820]">
               {claim.event_time ? claim.event_time.replace("T", " ") : "Undated"}
             </div>
           </div>
         </div>
         <div>
-          <div className="mb-1 text-[10px] uppercase text-slate-500">Source Excerpt</div>
-          <div className="rounded-lg border border-slate-800 bg-[#060e23] p-2.5 font-mono text-[11px] leading-relaxed text-slate-300">
+          <div className="mb-1 text-[10px] uppercase text-[#77736A]">Source Excerpt</div>
+          <div className="rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] p-2.5 font-mono text-[11px] leading-relaxed text-[#292820]">
             {claim.raw_text}
           </div>
         </div>
@@ -150,13 +150,13 @@ export function ConflictReasoningPage() {
         </Alert>
       ) : loading ? (
         <Card>
-          <CardContent className="p-8 text-center text-sm text-slate-400">
+          <CardContent className="p-8 text-center text-sm text-[#77736A]">
             Loading conflict reasoning records...
           </CardContent>
         </Card>
       ) : conflicts.length === 0 ? (
         <Card>
-          <CardContent className="p-8 text-center text-sm text-slate-400">
+          <CardContent className="p-8 text-center text-sm text-[#77736A]">
             No conflicts or temporal comparisons exist in this investigation.
           </CardContent>
         </Card>
@@ -174,21 +174,21 @@ export function ConflictReasoningPage() {
                   key={cf.id}
                   type="button"
                   onClick={() => setSelectedId(cf.id)}
-                  className={`w-full rounded-lg border p-3 text-left transition ${
+                  className={`w-full rounded-[10px] border p-3 text-left transition ${
                     active?.id === cf.id
-                      ? "border-cyan-400/60 bg-cyan-500/10"
-                      : "border-slate-800 bg-[#071026] hover:border-slate-700"
+                      ? "border-[#C87620]/60 bg-[#C87620]/10"
+                      : "border-[#E8E4DA] bg-[#F6F5F0]/70 hover:border-[#D9B98C]"
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2">
-                    <span className="truncate text-xs font-semibold text-white">
+                    <span className="truncate text-xs font-semibold text-[#292820]">
                       {cf.entity_name}
                     </span>
                     <Badge variant={cf.is_real_problem ? "danger" : "info"}>
                       {cf.conflict_type.replace(/_/g, " ")}
                     </Badge>
                   </div>
-                  <div className="mt-1 font-mono text-[11px] text-slate-400">
+                  <div className="mt-1 font-mono text-[11px] text-[#77736A]">
                     {cf.predicate} · {cf.severity.toUpperCase()}
                   </div>
                 </button>
@@ -214,11 +214,11 @@ export function ConflictReasoningPage() {
                     : "N/A";
 
                 return (
-                  <Card className="border-cyan-500/25">
+                  <Card className="border-[#D9B98C]">
                     <CardHeader className="pb-3">
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <div className="flex items-center gap-2">
-                          <Scale className="h-4 w-4 text-cyan-400" />
+                          <Scale className="h-4 w-4 text-[#C87620]" />
                           <CardTitle>Deterministic Reasoning Verdict</CardTitle>
                         </div>
                         <Badge variant={active.is_real_problem ? "danger" : "success"}>
@@ -227,39 +227,39 @@ export function ConflictReasoningPage() {
                       </div>
                     </CardHeader>
                     <CardContent className="space-y-4 text-xs">
-                      <div className="rounded-lg border border-slate-800 bg-[#071026] p-3.5">
-                        <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                      <div className="rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] p-3.5">
+                        <div className="text-[10px] font-semibold uppercase tracking-wider text-[#77736A]">
                           Why They Contradict / Differ
                         </div>
-                        <p className="mt-1 text-sm leading-relaxed text-slate-100">
+                        <p className="mt-1 text-sm leading-relaxed text-[#292820]">
                           {active.explanation}
                         </p>
                       </div>
 
                       <div className="grid gap-3 md:grid-cols-2">
-                        <div className="rounded-lg border border-slate-800 bg-[#071026] p-3.5">
-                          <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                        <div className="rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] p-3.5">
+                          <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-[#77736A]">
                             {compatibility.positive ? (
-                              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
+                              <CheckCircle2 className="h-3.5 w-3.5 text-[#638568]" />
                             ) : (
-                              <ShieldAlert className="h-3.5 w-3.5 text-rose-400" />
+                              <ShieldAlert className="h-3.5 w-3.5 text-[#C65D50]" />
                             )}
                             Could Both Be True?
                           </div>
-                          <div className="mt-1 font-semibold text-white">{compatibility.answer}</div>
-                          <p className="mt-1 text-slate-400">{compatibility.detail}</p>
+                          <div className="mt-1 font-semibold text-[#292820]">{compatibility.answer}</div>
+                          <p className="mt-1 text-[#77736A]">{compatibility.detail}</p>
                         </div>
 
-                        <div className="rounded-lg border border-slate-800 bg-[#071026] p-3.5">
-                          <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-slate-400">
-                            <Clock className="h-3.5 w-3.5 text-cyan-400" />
+                        <div className="rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] p-3.5">
+                          <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-[#77736A]">
+                            <Clock className="h-3.5 w-3.5 text-[#C87620]" />
                             Timeline & Reliability Analysis
                           </div>
-                          <div className="mt-1 font-semibold text-white">
+                          <div className="mt-1 font-semibold text-[#292820]">
                             Reliability Comparison: {relDiff}
                           </div>
-                          <p className="mt-1 text-slate-400">
-                            Rule: <span className="text-slate-200">{active.rule || active.conflict_type}</span>.
+                          <p className="mt-1 text-[#77736A]">
+                            Rule: <span className="font-medium text-[#292820]">{active.rule || active.conflict_type}</span>.
                             Source reliability weights evidence strength but never overrides or resolves a real conflict.
                           </p>
                         </div>

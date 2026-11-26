@@ -101,7 +101,7 @@ export function UploadPage() {
         description="Ingest PDFs, images, spreadsheets, JSON datasets, and text logs into a unified SQLite investigation."
         actions={
           <Button variant="outline" onClick={() => void handleRunDemo()} disabled={demoLoading || uploading}>
-            <Play className="h-4 w-4 text-cyan-400" />
+            <Play className="h-4 w-4 text-[#C87620]" />
             {demoLoading ? "Processing Demo..." : "Run 5-Case Demo Dataset"}
           </Button>
         }
@@ -134,8 +134,8 @@ export function UploadPage() {
             onClick={() => inputRef.current?.click()}
             className={`cursor-pointer rounded-xl border-2 border-dashed px-6 py-12 text-center transition-all ${
               dragging
-                ? "border-cyan-400 bg-cyan-500/10"
-                : "border-slate-700 bg-[#071026]/80 hover:border-cyan-500/50"
+                ? "border-[#C87620] bg-[#C87620]/8"
+                : "border-[#D9B98C] bg-[#F6F5F0]/60 hover:border-[#C87620]"
             }`}
           >
             <input
@@ -147,13 +147,13 @@ export function UploadPage() {
               onChange={(e) => addFiles(e.target.files)}
               className="hidden"
             />
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-400 ring-1 ring-cyan-500/30">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#C87620]/10 text-[#C87620] ring-1 ring-[#C87620]/25">
               <UploadCloud className="h-7 w-7" />
             </div>
-            <h3 className="mt-4 text-base font-semibold text-white">
+            <h3 className="mt-4 text-base font-semibold text-[#292820]">
               Drag & drop evidence files here, or click to browse
             </h3>
-            <p className="mt-1.5 text-xs text-slate-400">
+            <p className="mt-1.5 text-xs text-[#77736A]">
               Supported:{" "}
               {(health?.supported_extensions?.length
                 ? health.supported_extensions
@@ -163,7 +163,7 @@ export function UploadPage() {
                 .join(" · ")}
             </p>
             {!health?.ocr_available && (
-              <p className="mt-2 text-[11px] text-amber-400">
+              <p className="mt-2 text-[11px] text-[#94661F]">
                 Note: Tesseract OCR is currently unavailable; images will be ingested without OCR text extraction.
               </p>
             )}
@@ -172,7 +172,7 @@ export function UploadPage() {
           {files.length > 0 && (
             <div className="mt-6 space-y-4">
               <div className="flex items-center justify-between">
-                <h4 className="text-sm font-semibold text-white">
+                <h4 className="text-sm font-semibold text-[#C87620]">
                   Queued Files ({files.length})
                 </h4>
                 <Button
@@ -192,15 +192,15 @@ export function UploadPage() {
                 {files.map((file, idx) => (
                   <div
                     key={`${file.name}-${file.size}`}
-                    className="flex items-center justify-between gap-3 rounded-lg border border-slate-800 bg-[#071026] px-4 py-3"
+                    className="flex items-center justify-between gap-3 rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0]/70 px-4 py-3"
                   >
                     <div className="flex min-w-0 items-center gap-3">
-                      <FileText className="h-4 w-4 shrink-0 text-cyan-400" />
+                      <FileText className="h-4 w-4 shrink-0 text-[#C87620]" />
                       <div className="min-w-0">
-                        <div className="truncate text-sm font-medium text-slate-100">
+                        <div className="truncate text-sm font-medium text-[#292820]">
                           {file.name}
                         </div>
-                        <div className="text-xs text-slate-400">
+                        <div className="text-xs text-[#77736A]">
                           {(file.size / 1024).toFixed(1)} KB ·{" "}
                           {file.name.split(".").pop()?.toUpperCase() || "FILE"}
                         </div>
@@ -213,7 +213,7 @@ export function UploadPage() {
                       onClick={() => setFiles((prev) => prev.filter((_, i) => i !== idx))}
                       aria-label={`Remove ${file.name}`}
                     >
-                      <Trash2 className="h-4 w-4 text-rose-400" />
+                      <Trash2 className="h-4 w-4 text-[#C65D50]" />
                     </Button>
                   </div>
                 ))}
@@ -221,13 +221,13 @@ export function UploadPage() {
 
               {uploading && (
                 <div className="space-y-1.5">
-                  <div className="flex justify-between text-xs text-slate-400">
+                  <div className="flex justify-between text-xs text-[#77736A]">
                     <span>Uploading & running extraction, graph, and conflict analysis...</span>
-                    <span className="font-mono text-cyan-300">{progress}%</span>
+                    <span className="font-mono font-medium text-[#C87620]">{progress}%</span>
                   </div>
-                  <div className="h-2 overflow-hidden rounded-full bg-slate-800">
+                  <div className="h-2 overflow-hidden rounded-full bg-[#E8E4DA]">
                     <div
-                      className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 transition-all duration-300"
+                      className="h-full rounded-full bg-[#C87620] transition-all duration-300"
                       style={{ width: `${progress}%` }}
                     />
                   </div>
@@ -245,11 +245,11 @@ export function UploadPage() {
 
       {/* Extraction & Pipeline Outcome */}
       {lastUpload && (
-        <Card className="border-emerald-500/30">
+        <Card className="border-[#638568]/40">
           <CardHeader>
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-emerald-400" />
+                <CheckCircle2 className="h-5 w-5 text-[#638568]" />
                 <CardTitle>Investigation Persisted: {lastUpload.analysis_id}</CardTitle>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -280,20 +280,20 @@ export function UploadPage() {
             {lastUpload.documents.map((doc) => (
               <div
                 key={doc.id}
-                className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-slate-800 bg-[#071026] px-4 py-3"
+                className="flex flex-wrap items-center justify-between gap-3 rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0]/70 px-4 py-3"
               >
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium text-white">{doc.filename}</span>
+                    <span className="text-sm font-medium text-[#292820]">{doc.filename}</span>
                     <Badge variant="info">{doc.file_type.toUpperCase()}</Badge>
                     <Badge variant="neutral">{doc.extraction_method}</Badge>
                   </div>
                   {doc.warnings.length > 0 && (
-                    <div className="mt-1 text-xs text-amber-400">{doc.warnings.join(" · ")}</div>
+                    <div className="mt-1 text-xs text-[#94661F]">{doc.warnings.join(" · ")}</div>
                   )}
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs text-slate-300">
+                  <span className="font-mono text-xs text-[#77736A]">
                     Rel: {Math.round(doc.reliability * 100)}%
                   </span>
                   {doc.is_suspicious ? (

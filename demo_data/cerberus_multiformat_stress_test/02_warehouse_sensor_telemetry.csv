@@ -1,0 +1,6 @@
+record_id,source,entity,attribute,value,unit,timestamp,note
+SEN-101,SCADA Telemetry Bus,Machine MX-07,status,operational,,2026-10-10 08:00,Pre-incident nominal baseline check
+SEN-102,SCADA Telemetry Bus,Machine MX-07,temperature,24,C,2026-10-10 08:00,Baseline ambient operating temperature
+SEN-103,SCADA Telemetry Bus,Machine MX-07,status,failed,,2026-10-14 02:15,Emergency thermal trip shutdown in WH-03
+SEN-104,SCADA Telemetry Bus,Machine MX-07,temperature,89,C,2026-10-14 02:15,Core bearing temperature spike 89 C
+SEN-105,SCADA Telemetry Bus,Warehouse WH-03,ambient_status,power_blackout,,2026-10-14 02:16,Substation feeder tripped during MX-07 failure

@@ -39,7 +39,7 @@ export function TopBar({ onOpenMobileNav }: { onOpenMobileNav: () => void }) {
   };
 
   return (
-    <header className="sticky top-0 z-20 flex h-16 items-center justify-between gap-3 border-b border-slate-800/90 bg-[#071026]/90 px-4 backdrop-blur-md sm:px-6">
+    <header className="sticky top-0 z-20 flex h-16 items-center justify-between gap-3 border-b border-[#E8E4DA] bg-white/95 px-4 backdrop-blur-md sm:px-6">
       <div className="flex min-w-0 items-center gap-3">
         <Button
           variant="ghost"
@@ -53,7 +53,7 @@ export function TopBar({ onOpenMobileNav }: { onOpenMobileNav: () => void }) {
 
         <div className="min-w-0">
           <div className="flex items-center gap-2.5">
-            <h1 className="truncate text-sm font-semibold text-white sm:text-base">
+            <h1 className="truncate text-sm font-semibold text-[#292820] sm:text-base">
               Multimodal Intelligence Command Center
             </h1>
             {activeAnalysisId && (
@@ -62,7 +62,7 @@ export function TopBar({ onOpenMobileNav }: { onOpenMobileNav: () => void }) {
               </Badge>
             )}
           </div>
-          <p className="hidden text-xs text-slate-400 md:block">
+          <p className="hidden text-xs text-[#77736A] md:block">
             Cross-modal conflict reasoning · Knowledge graph · Traceable forensics
           </p>
         </div>
@@ -78,7 +78,7 @@ export function TopBar({ onOpenMobileNav }: { onOpenMobileNav: () => void }) {
                 void selectAnalysis(e.target.value);
               }
             }}
-            className="hidden h-8 max-w-[200px] rounded-lg border border-slate-700 bg-[#0b1736] px-2.5 font-mono text-xs text-slate-200 outline-none focus:border-cyan-500 xl:block"
+            className="hidden h-8 max-w-[200px] rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] px-2.5 font-mono text-xs text-[#292820] outline-none focus:border-[#C87620] xl:block"
           >
             {history.map((item) => (
               <option key={item.analysis_id} value={item.analysis_id}>
@@ -96,16 +96,16 @@ export function TopBar({ onOpenMobileNav }: { onOpenMobileNav: () => void }) {
           title="Run built-in 5-case multimodal demo"
           className="hidden sm:inline-flex"
         >
-          <Play className="h-3.5 w-3.5 text-cyan-400" />
+          <Play className="h-3.5 w-3.5 text-[#C87620]" />
           <span>{demoLoading ? "Running..." : "Run Demo"}</span>
         </Button>
 
         <Badge variant="neutral" className="hidden gap-1.5 md:inline-flex">
-          <Database className="h-3 w-3 text-cyan-400" />
+          <Database className="h-3 w-3 text-[#C87620]" />
           <span>SQLite Local</span>
         </Badge>
 
-        <Badge variant={ollamaOnline ? "purple" : "warning"} className="hidden gap-1.5 sm:inline-flex">
+        <Badge variant={ollamaOnline ? "info" : "warning"} className="hidden gap-1.5 sm:inline-flex">
           <BrainCircuit className="h-3 w-3" />
           <span>{ollamaOnline ? `Ollama · ${health?.ollama_model}` : "Ollama Offline"}</span>
         </Badge>

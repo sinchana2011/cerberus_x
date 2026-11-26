@@ -18,15 +18,15 @@ export function PageHeader({
   actions?: React.ReactNode;
 }) {
   return (
-    <div className="mb-6 flex flex-col justify-between gap-4 border-b border-slate-800/80 pb-5 md:flex-row md:items-end">
+    <div className="mb-6 flex flex-col justify-between gap-4 border-b border-[#E8E4DA] pb-5 md:flex-row md:items-end">
       <div>
         {eyebrow && (
-          <div className="mb-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-400">
+          <div className="mb-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#77736A]">
             {eyebrow}
           </div>
         )}
-        <h2 className="text-2xl font-bold tracking-tight text-white">{title}</h2>
-        <p className="mt-1 max-w-2xl text-sm text-slate-400">{description}</p>
+        <h2 className="text-2xl font-bold tracking-tight text-[#C87620]">{title}</h2>
+        <p className="mt-1 max-w-2xl text-sm text-[#77736A]">{description}</p>
       </div>
       {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
     </div>
@@ -53,12 +53,12 @@ export function NoAnalysisEmptyState({
   };
 
   return (
-    <div className="animate-fade-in rounded-xl border border-dashed border-cyan-500/25 bg-[#0a1530]/80 p-10 text-center">
-      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-400 ring-1 ring-cyan-500/30">
+    <div className="animate-fade-in rounded-xl border border-dashed border-[#D9B98C] bg-white p-10 text-center shadow-[0_1px_3px_rgba(41,40,32,0.04)]">
+      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-[#C87620]/10 text-[#C87620] ring-1 ring-[#C87620]/25">
         <UploadCloud className="h-6 w-6" />
       </div>
-      <h3 className="mt-4 text-base font-semibold text-white">{title}</h3>
-      <p className="mx-auto mt-1.5 max-w-md text-sm text-slate-400">{description}</p>
+      <h3 className="mt-4 text-base font-semibold text-[#C87620]">{title}</h3>
+      <p className="mx-auto mt-1.5 max-w-md text-sm text-[#77736A]">{description}</p>
       <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
         <Button asChild>
           <Link to="/upload">
@@ -67,7 +67,7 @@ export function NoAnalysisEmptyState({
           </Link>
         </Button>
         <Button variant="outline" onClick={() => void handleDemo()} disabled={demoLoading}>
-          <Play className="h-4 w-4 text-cyan-400" />
+          <Play className="h-4 w-4 text-[#C87620]" />
           {demoLoading ? "Running Demo Pipeline..." : "Load Demo Dataset"}
         </Button>
       </div>

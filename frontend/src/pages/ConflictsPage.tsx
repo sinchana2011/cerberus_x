@@ -123,12 +123,12 @@ export function ConflictsPage() {
             <CardContent className="flex flex-wrap items-center justify-between gap-3 p-4">
               <div className="flex flex-wrap items-center gap-2.5">
                 <div className="relative">
-                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
+                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-[#77736A]" />
                   <input
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     placeholder="Search entity, rule, source..."
-                    className="h-9 w-56 rounded-lg border border-slate-700 bg-[#071026] pl-9 pr-3 text-xs text-slate-100 outline-none focus:border-cyan-500"
+                    className="h-9 w-56 rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] pl-9 pr-3 text-xs text-[#292820] placeholder:text-[#77736A] outline-none focus:border-[#C87620]"
                   />
                 </div>
 
@@ -136,7 +136,7 @@ export function ConflictsPage() {
                   aria-label="Filter by conflict type"
                   value={typeFilter}
                   onChange={(e) => setTypeFilter(e.target.value as "" | ConflictType)}
-                  className="h-9 rounded-lg border border-slate-700 bg-[#071026] px-3 text-xs text-slate-200 outline-none focus:border-cyan-500"
+                  className="h-9 rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] px-3 text-xs text-[#292820] outline-none focus:border-[#C87620]"
                 >
                   {TYPE_OPTIONS.map((opt) => (
                     <option key={opt.label} value={opt.value}>
@@ -149,7 +149,7 @@ export function ConflictsPage() {
                   aria-label="Filter by severity"
                   value={severityFilter}
                   onChange={(e) => setSeverityFilter(e.target.value as "" | Severity)}
-                  className="h-9 rounded-lg border border-slate-700 bg-[#071026] px-3 text-xs text-slate-200 outline-none focus:border-cyan-500"
+                  className="h-9 rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] px-3 text-xs text-[#292820] outline-none focus:border-[#C87620]"
                 >
                   <option value="">All Severities</option>
                   <option value="high">High Severity</option>
@@ -160,18 +160,18 @@ export function ConflictsPage() {
                 <button
                   type="button"
                   onClick={() => setOnlyReal((v) => !v)}
-                  className={`h-9 rounded-lg border px-3 text-xs font-medium transition ${
+                  className={`h-9 rounded-[10px] border px-3 text-xs font-medium transition ${
                     onlyReal
-                      ? "border-rose-500/50 bg-rose-500/15 text-rose-200"
-                      : "border-slate-700 bg-[#071026] text-slate-300"
+                      ? "border-[#C65D50]/50 bg-[#C65D50]/12 text-[#A6463B]"
+                      : "border-[#E8E4DA] bg-[#F6F5F0] text-[#77736A] hover:text-[#292820]"
                   }`}
                 >
                   Real Contradictions Only ({realCount})
                 </button>
               </div>
 
-              <div className="text-xs text-slate-400">
-                Showing <span className="font-semibold text-white">{visible.length}</span> conflict(s)
+              <div className="text-xs text-[#77736A]">
+                Showing <span className="font-semibold text-[#292820]">{visible.length}</span> conflict(s)
               </div>
             </CardContent>
           </Card>
@@ -180,13 +180,13 @@ export function ConflictsPage() {
             <div className={selected ? "lg:col-span-7" : "lg:col-span-12"}>
               {loading ? (
                 <Card>
-                  <CardContent className="p-8 text-center text-sm text-slate-400">
+                  <CardContent className="p-8 text-center text-sm text-[#77736A]">
                     Loading conflicts...
                   </CardContent>
                 </Card>
               ) : visible.length === 0 ? (
                 <Card>
-                  <CardContent className="p-8 text-center text-sm text-slate-400">
+                  <CardContent className="p-8 text-center text-sm text-[#77736A]">
                     No conflicts match the active filters.
                   </CardContent>
                 </Card>
@@ -196,8 +196,8 @@ export function ConflictsPage() {
                     <Card
                       key={c.id}
                       onClick={() => setSelected(c)}
-                      className={`cursor-pointer transition hover:border-cyan-500/40 ${
-                        selected?.id === c.id ? "border-cyan-400 ring-1 ring-cyan-400/40" : ""
+                      className={`cursor-pointer transition hover:border-[#D9B98C] ${
+                        selected?.id === c.id ? "border-[#C87620] ring-1 ring-[#C87620]/30" : ""
                       }`}
                     >
                       <CardHeader className="pb-2">
@@ -225,14 +225,14 @@ export function ConflictsPage() {
                         </div>
                       </CardHeader>
                       <CardContent className="space-y-3">
-                        <p className="text-xs leading-relaxed text-slate-300">{c.explanation}</p>
+                        <p className="text-xs leading-relaxed text-[#292820]">{c.explanation}</p>
                         <div className="flex flex-wrap gap-1.5">
                           {c.claims.map((cl) => (
                             <span
                               key={cl.id}
-                              className="rounded-md border border-slate-800 bg-[#071026] px-2 py-1 text-[11px] text-slate-300"
+                              className="rounded-md border border-[#E8E4DA] bg-[#F6F5F0] px-2 py-1 text-[11px] text-[#77736A]"
                             >
-                              <span className="font-semibold text-cyan-300">{cl.value}</span> ·{" "}
+                              <span className="font-semibold text-[#C87620]">{cl.value}</span> ·{" "}
                               {cl.source_filename ?? cl.source_id}
                             </span>
                           ))}
@@ -259,12 +259,12 @@ export function ConflictsPage() {
                           key={c.id}
                           onClick={() => setSelected(c)}
                           className={`cursor-pointer ${
-                            selected?.id === c.id ? "bg-cyan-500/10" : ""
+                            selected?.id === c.id ? "bg-[#C87620]/8" : ""
                           }`}
                         >
                           <TableCell>
-                            <div className="font-medium text-white">{c.entity_name}</div>
-                            <div className="font-mono text-[11px] text-slate-400">{c.predicate}</div>
+                            <div className="font-medium text-[#292820]">{c.entity_name}</div>
+                            <div className="font-mono text-[11px] text-[#77736A]">{c.predicate}</div>
                           </TableCell>
                           <TableCell>
                             <Badge variant={c.is_real_problem ? "danger" : "info"}>
@@ -284,10 +284,10 @@ export function ConflictsPage() {
                               {c.severity}
                             </Badge>
                           </TableCell>
-                          <TableCell className="font-mono text-xs text-cyan-300">
+                          <TableCell className="font-mono text-xs text-[#C87620]">
                             {c.claims.map((cl) => cl.value).join(" vs ")}
                           </TableCell>
-                          <TableCell className="text-xs text-slate-300">
+                          <TableCell className="text-xs text-[#77736A]">
                             {c.claims.map((cl) => cl.source_filename ?? cl.source_id).join(", ")}
                           </TableCell>
                         </TableRow>
@@ -300,7 +300,7 @@ export function ConflictsPage() {
 
             {selected && (
               <Card className="lg:col-span-5">
-                <CardHeader className="flex flex-row items-start justify-between space-y-0 border-b border-slate-800 pb-3">
+                <CardHeader className="flex flex-row items-start justify-between space-y-0 border-b border-[#E8E4DA] pb-3">
                   <div>
                     <CardTitle>{selected.entity_name}</CardTitle>
                     <CardDescription className="font-mono">{selected.id}</CardDescription>
@@ -308,7 +308,7 @@ export function ConflictsPage() {
                   <button
                     type="button"
                     onClick={() => setSelected(null)}
-                    className="rounded p-1 text-slate-400 hover:bg-slate-800 hover:text-white"
+                    className="rounded-lg p-1 text-[#77736A] hover:bg-[#F6F5F0] hover:text-[#292820]"
                     aria-label="Close detail panel"
                   >
                     <X className="h-4 w-4" />
@@ -316,42 +316,42 @@ export function ConflictsPage() {
                 </CardHeader>
                 <CardContent className="space-y-4 pt-4 text-xs">
                   <div>
-                    <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                    <div className="text-[10px] font-semibold uppercase tracking-wider text-[#77736A]">
                       Explanation
                     </div>
-                    <p className="mt-1 leading-relaxed text-slate-200">{selected.explanation}</p>
+                    <p className="mt-1 leading-relaxed text-[#292820]">{selected.explanation}</p>
                   </div>
 
                   {selected.rule && (
-                    <div className="rounded-lg border border-cyan-500/20 bg-cyan-500/5 p-3">
-                      <div className="text-[10px] font-semibold uppercase tracking-wider text-cyan-400">
+                    <div className="rounded-[10px] border border-[#D9B98C] bg-[#FAF6EE] p-3">
+                      <div className="text-[10px] font-semibold uppercase tracking-wider text-[#C87620]">
                         Detection Rule
                       </div>
-                      <p className="mt-1 text-slate-200">{selected.rule}</p>
+                      <p className="mt-1 text-[#292820]">{selected.rule}</p>
                     </div>
                   )}
 
                   <div className="space-y-2.5">
-                    <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                    <div className="text-[10px] font-semibold uppercase tracking-wider text-[#77736A]">
                       Involved Claims ({selected.claims.length})
                     </div>
                     {selected.claims.map((cl) => (
                       <div
                         key={cl.id}
-                        className="rounded-lg border border-slate-800 bg-[#071026] p-3"
+                        className="rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0]/70 p-3"
                       >
                         <div className="flex items-center justify-between gap-2">
-                          <span className="font-semibold text-cyan-300">
+                          <span className="font-semibold text-[#C87620]">
                             {cl.value} {cl.unit ?? ""}
                           </span>
                           <Badge variant="neutral">Rel {Math.round(cl.reliability * 100)}%</Badge>
                         </div>
-                        <div className="mt-1 text-[11px] text-slate-400">
+                        <div className="mt-1 text-[11px] text-[#77736A]">
                           {cl.source_filename ?? cl.source_id}
                           {cl.locator ? ` · ${cl.locator}` : ""}
                           {cl.event_time ? ` · ${cl.event_time}` : " · undated"}
                         </div>
-                        <p className="mt-2 rounded bg-black/30 p-2 font-mono text-[11px] text-slate-300">
+                        <p className="mt-2 rounded-lg border border-[#E8E4DA] bg-white p-2 font-mono text-[11px] text-[#292820]">
                           {cl.raw_text}
                         </p>
                       </div>

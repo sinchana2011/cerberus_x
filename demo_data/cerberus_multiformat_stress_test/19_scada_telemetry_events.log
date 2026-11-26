@@ -1,0 +1,4 @@
+2026-10-10 08:00 INFO [WH-03/MX-07] Machine MX-07 status=operational temp=24C
+2026-10-14 02:14 WARN [WH-03/MX-07] Machine MX-07 thermal threshold exceeded temp=84C
+2026-10-14 02:15 CRIT [WH-03/MX-07] Machine MX-07 status=failed temp=89C feeder=BLACKOUT
+2026-10-14 16:00 INFO [WH-03/WMS] Inventory reconciliation snapshot: 80 units vs 120 units

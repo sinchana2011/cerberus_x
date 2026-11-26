@@ -55,41 +55,41 @@ export function ForensicsPage() {
         </Alert>
       ) : loading ? (
         <Card>
-          <CardContent className="p-8 text-center text-sm text-slate-400">
+          <CardContent className="p-8 text-center text-sm text-[#77736A]">
             Loading forensic audit records...
           </CardContent>
         </Card>
       ) : !forensics ? null : (
         <>
           <Alert variant="info">
-            <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
+            <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#C87620]" />
             <div className="text-xs">
               All suspicious segments (hidden white-on-white text, invisible render modes, or prompt injections) are quarantined with{" "}
-              <span className="font-mono text-cyan-300">status=suspicious</span> and excluded from verified answers while remaining visible here for analyst review.
+              <span className="font-mono font-semibold text-[#C87620]">status=suspicious</span> and excluded from verified answers while remaining visible here for analyst review.
             </div>
           </Alert>
 
           <div className="grid gap-4 sm:grid-cols-3">
             <Card>
               <CardContent className="p-4">
-                <div className="text-xs text-slate-400">Inspected Documents</div>
-                <div className="mt-1 text-2xl font-bold text-white">
+                <div className="text-xs text-[#77736A]">Inspected Documents</div>
+                <div className="mt-1 text-2xl font-bold text-[#292820]">
                   {forensics.total_documents}
                 </div>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-4">
-                <div className="text-xs text-slate-400">Suspicious Documents</div>
-                <div className="mt-1 text-2xl font-bold text-rose-400">
+                <div className="text-xs text-[#77736A]">Suspicious Documents</div>
+                <div className="mt-1 text-2xl font-bold text-[#C65D50]">
                   {forensics.suspicious_documents}
                 </div>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-4">
-                <div className="text-xs text-slate-400">Security Flags Raised</div>
-                <div className="mt-1 text-2xl font-bold text-amber-400">
+                <div className="text-xs text-[#77736A]">Security Flags Raised</div>
+                <div className="mt-1 text-2xl font-bold text-[#D49A45]">
                   {forensics.total_flags}
                 </div>
               </CardContent>
@@ -100,16 +100,16 @@ export function ForensicsPage() {
             {forensics.documents.map((doc) => (
               <Card
                 key={doc.id}
-                className={doc.is_suspicious ? "border-rose-500/45" : "border-slate-800"}
+                className={doc.is_suspicious ? "border-[#C65D50]/50" : "border-[#E8E4DA]"}
               >
                 <CardHeader>
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
                       <div className="flex items-center gap-2">
                         {doc.is_suspicious ? (
-                          <ShieldAlert className="h-4 w-4 text-rose-400" />
+                          <ShieldAlert className="h-4 w-4 text-[#C65D50]" />
                         ) : (
-                          <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                          <CheckCircle2 className="h-4 w-4 text-[#638568]" />
                         )}
                         <CardTitle className="text-base">{doc.filename}</CardTitle>
                       </div>
@@ -133,16 +133,16 @@ export function ForensicsPage() {
                 <CardContent className="space-y-4 text-xs">
                   {/* Reliability progress */}
                   <div>
-                    <div className="mb-1 flex justify-between text-[11px] text-slate-400">
+                    <div className="mb-1 flex justify-between text-[11px] text-[#77736A]">
                       <span>Source Reliability Score</span>
-                      <span className="font-mono text-white">
+                      <span className="font-mono font-medium text-[#292820]">
                         {doc.reliability.toFixed(2)} / 1.00
                       </span>
                     </div>
-                    <div className="h-2 overflow-hidden rounded-full bg-slate-800">
+                    <div className="h-2 overflow-hidden rounded-full bg-[#E8E4DA]">
                       <div
                         className={`h-full rounded-full ${
-                          doc.is_suspicious ? "bg-rose-500" : "bg-cyan-400"
+                          doc.is_suspicious ? "bg-[#C65D50]" : "bg-[#638568]"
                         }`}
                         style={{ width: `${Math.round(doc.reliability * 100)}%` }}
                       />
@@ -152,16 +152,16 @@ export function ForensicsPage() {
                   {/* Security Flags */}
                   {doc.flags.length > 0 && (
                     <div className="space-y-2">
-                      <div className="text-[11px] font-semibold uppercase tracking-wider text-rose-300">
+                      <div className="text-[11px] font-semibold uppercase tracking-wider text-[#A6463B]">
                         Security Flags ({doc.flags.length})
                       </div>
                       {doc.flags.map((flag, fIdx) => (
                         <div
                           key={fIdx}
-                          className="rounded-lg border border-rose-500/35 bg-rose-500/10 p-3"
+                          className="rounded-[10px] border border-[#C65D50]/35 bg-[#FDF5F4] p-3"
                         >
                           <div className="flex flex-wrap items-center justify-between gap-2">
-                            <span className="flex items-center gap-1.5 font-semibold text-rose-200">
+                            <span className="flex items-center gap-1.5 font-semibold text-[#A6463B]">
                               <FileWarning className="h-3.5 w-3.5" />
                               {flag.kind.replace(/_/g, " ").toUpperCase()}
                             </span>
@@ -172,9 +172,9 @@ export function ForensicsPage() {
                               <Badge variant="danger">{flag.severity}</Badge>
                             </div>
                           </div>
-                          <p className="mt-1 text-slate-200">{flag.description}</p>
+                          <p className="mt-1 text-[#292820]">{flag.description}</p>
                           {flag.evidence && (
-                            <pre className="mt-2 whitespace-pre-wrap rounded bg-black/40 p-2 font-mono text-[11px] text-rose-200">
+                            <pre className="mt-2 whitespace-pre-wrap rounded-lg border border-[#C65D50]/25 bg-white p-2 font-mono text-[11px] text-[#A6463B]">
                               {flag.evidence}
                             </pre>
                           )}
@@ -185,11 +185,11 @@ export function ForensicsPage() {
 
                   {/* Warnings */}
                   {doc.warnings.length > 0 && (
-                    <div className="rounded-lg border border-amber-500/25 bg-amber-500/5 p-3">
-                      <div className="text-[10px] font-semibold uppercase tracking-wider text-amber-300">
+                    <div className="rounded-[10px] border border-[#D49A45]/40 bg-[#FCF7EE] p-3">
+                      <div className="text-[10px] font-semibold uppercase tracking-wider text-[#94661F]">
                         Extraction & Sanitizer Warnings
                       </div>
-                      <ul className="mt-1 list-disc space-y-1 pl-4 text-amber-200/90">
+                      <ul className="mt-1 list-disc space-y-1 pl-4 text-[#292820]">
                         {doc.warnings.map((w, wIdx) => (
                           <li key={wIdx}>{w}</li>
                         ))}
@@ -199,10 +199,10 @@ export function ForensicsPage() {
 
                   {/* Raw Text Viewer */}
                   <div>
-                    <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                    <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-[#77736A]">
                       Original Extracted Text (Untrusted Evidence)
                     </div>
-                    <pre className="max-h-48 overflow-y-auto whitespace-pre-wrap rounded-lg border border-slate-800 bg-[#060e23] p-3 font-mono text-[11px] leading-relaxed text-slate-300">
+                    <pre className="max-h-48 overflow-y-auto whitespace-pre-wrap rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] p-3 font-mono text-[11px] leading-relaxed text-[#292820]">
                       {doc.raw_text || "(No text extracted)"}
                     </pre>
                   </div>

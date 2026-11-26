@@ -1,0 +1,10 @@
+record_id,source,entity,attribute,value,unit,timestamp,note
+DSP-001,ERP Dispatch System,Shipment SHP-2048,quantity_dispatched,500,units,2026-10-14 08:30,Primary dock 3 dispatch scan for Order ORD-7712
+DSP-002,ERP Dispatch System,Shipment SHP-2048,location,Bengaluru,,2026-10-14 11:00,GPS ping at Bengaluru Outer Ring Hub
+DSP-003,ERP Dispatch System,Shipment SHP-2048,status,delivered,,2026-10-15 17:00,ERP auto-closure marked delivered
+DSP-004,ERP Dispatch System,Shipment SHP-2048,shipment_date,2026-10-14,,2026-10-14 08:30,Dispatch date recorded in ERP
+DSP-005,ERP Dispatch System,Shipment SHP-2048,assigned_vehicle,Vehicle VH-19,,2026-10-14 08:30,Vehicle VH-19 assigned to SHP-2048
+DSP-006,ERP Dispatch System,Shipment SHP-2048,dispatch_time,2026-10-14 08:30,,2026-10-14 08:30,Automated gate manifest release
+DSP-007,ERP Dispatch System,Shipment SHP-2048,product_weight,4200,kg,2026-10-14 08:30,Manifest net weight 4200 kg
+DSP-001-DUP,ERP Dispatch System,Shipment SHP-2048,quantity_dispatched,500,units,2026-10-14 08:30,Duplicate batch replay from ERP Dispatch System
+DSP-008,ERP Dispatch System,Order ORD-7712,customer,Helios Grid Energy Pvt Ltd,,2026-10-10 10:00,Customer account linked to ORD-7712

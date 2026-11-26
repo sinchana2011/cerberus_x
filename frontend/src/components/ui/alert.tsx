@@ -8,10 +8,10 @@ const alertVariants = cva(
   {
     variants: {
       variant: {
-        info: "border-cyan-500/30 bg-cyan-500/10 text-cyan-100",
-        success: "border-emerald-500/30 bg-emerald-500/10 text-emerald-100",
-        warning: "border-amber-500/30 bg-amber-500/10 text-amber-100",
-        destructive: "border-rose-500/35 bg-rose-500/10 text-rose-100",
+        info: "border-[#D9B98C] bg-[#FAF6EE] text-[#292820]",
+        success: "border-[#638568]/35 bg-[#638568]/10 text-[#292820]",
+        warning: "border-[#D49A45]/45 bg-[#D49A45]/10 text-[#292820]",
+        destructive: "border-[#C65D50]/45 bg-[#C65D50]/10 text-[#8F372D]",
       },
     },
     defaultVariants: {

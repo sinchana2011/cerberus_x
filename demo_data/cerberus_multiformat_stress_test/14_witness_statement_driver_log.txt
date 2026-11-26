@@ -1,0 +1,8 @@
+DRIVER TRIP LOG & WITNESS STATEMENT
+Date: 2026-10-14
+Driver: Vikram Shetty
+
+Legacy fleet slip listed Vehicle VH-91, though gate placard showed Vehicle VH-19.
+Vehicle VH-19 departed Bengaluru on 2026-10-14 at 14:00.
+Vehicle VH-19 arrived in Hyderabad on 2026-10-14 at 09:30.
+Note: Arrival timestamp 09:30 precedes departure timestamp 14:00 on the same day.

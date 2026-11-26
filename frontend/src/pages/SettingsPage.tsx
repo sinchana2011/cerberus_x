@@ -52,7 +52,7 @@ export function SettingsPage() {
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2">
-                <Server className="h-4 w-4 text-cyan-400" />
+                <Server className="h-4 w-4 text-[#C87620]" />
                 Python FastAPI Backend
               </CardTitle>
               <Badge variant={backendOk ? "success" : "danger"}>
@@ -61,14 +61,14 @@ export function SettingsPage() {
             </div>
             <CardDescription>Endpoint: {API_BASE_URL}</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2 text-xs text-slate-300">
-            <div className="flex justify-between rounded-lg border border-slate-800 bg-[#071026] p-3">
-              <span className="text-slate-400">Service Name</span>
+          <CardContent className="space-y-2 text-xs text-[#292820]">
+            <div className="flex justify-between rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] p-3">
+              <span className="text-[#77736A]">Service Name</span>
               <span className="font-mono">{health?.service ?? "cerberus-x"}</span>
             </div>
-            <div className="flex justify-between rounded-lg border border-slate-800 bg-[#071026] p-3">
-              <span className="text-slate-400">Network Policy</span>
-              <span className="text-emerald-400">127.0.0.1 Localhost Isolated</span>
+            <div className="flex justify-between rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] p-3">
+              <span className="text-[#77736A]">Network Policy</span>
+              <span className="font-medium text-[#48664D]">127.0.0.1 Localhost Isolated</span>
             </div>
           </CardContent>
         </Card>
@@ -78,7 +78,7 @@ export function SettingsPage() {
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2">
-                <Database className="h-4 w-4 text-cyan-400" />
+                <Database className="h-4 w-4 text-[#C87620]" />
                 SQLite Persistence
               </CardTitle>
               <Badge variant={backendOk ? "success" : "neutral"}>
@@ -87,24 +87,24 @@ export function SettingsPage() {
             </div>
             <CardDescription>Local relational store for analyses, claims, conflicts & twin states</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2 text-xs text-slate-300">
-            <div className="flex justify-between rounded-lg border border-slate-800 bg-[#071026] p-3">
-              <span className="text-slate-400">Foreign Key Cascade</span>
-              <span className="text-emerald-400">Enabled</span>
+          <CardContent className="space-y-2 text-xs text-[#292820]">
+            <div className="flex justify-between rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] p-3">
+              <span className="text-[#77736A]">Foreign Key Cascade</span>
+              <span className="font-medium text-[#48664D]">Enabled</span>
             </div>
-            <div className="flex justify-between rounded-lg border border-slate-800 bg-[#071026] p-3">
-              <span className="text-slate-400">Cloud Sync</span>
+            <div className="flex justify-between rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] p-3">
+              <span className="text-[#77736A]">Cloud Sync</span>
               <span>Disabled (Offline Only)</span>
             </div>
           </CardContent>
         </Card>
 
         {/* Ollama Local AI */}
-        <Card className={ollamaOk ? "border-purple-500/35" : "border-amber-500/35"}>
+        <Card className={ollamaOk ? "border-[#638568]/45" : "border-[#D49A45]/50"}>
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2">
-                <BrainCircuit className="h-4 w-4 text-purple-400" />
+                <BrainCircuit className="h-4 w-4 text-[#C87620]" />
                 Ollama Local LLM
               </CardTitle>
               <Badge variant={ollamaOk && modelOk ? "success" : "warning"}>
@@ -114,15 +114,15 @@ export function SettingsPage() {
             <CardDescription>Configured Model: {health?.ollama_model ?? "llama3.2:3b"}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-3 text-xs">
-            <div className="rounded-lg border border-slate-800 bg-[#071026] p-3 text-slate-300">
+            <div className="rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] p-3 text-[#292820]">
               {health?.ollama_message || "Run health check to inspect Ollama status."}
             </div>
             {!ollamaOk && (
               <Alert variant="info">
-                <Activity className="mt-0.5 h-4 w-4 shrink-0" />
+                <Activity className="mt-0.5 h-4 w-4 shrink-0 text-[#C87620]" />
                 <div className="space-y-1 text-xs">
-                  <div className="font-semibold">Deterministic Reasoning Continues Normally</div>
-                  <p className="text-slate-300">
+                  <div className="font-semibold text-[#292820]">Deterministic Reasoning Continues Normally</div>
+                  <p className="text-[#77736A]">
                     When Ollama is offline, all extraction, conflict detection, Digital Twin, and Ask CERBERUS answers continue running deterministically without breaking. To enable LLM narrative synthesis, start Ollama locally (`ollama serve`) with `llama3.2:3b`.
                   </p>
                 </div>
@@ -136,7 +136,7 @@ export function SettingsPage() {
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2">
-                <ScanSearch className="h-4 w-4 text-cyan-400" />
+                <ScanSearch className="h-4 w-4 text-[#C87620]" />
                 Extraction & OCR Engine
               </CardTitle>
               <Badge variant={health?.ocr_available ? "success" : "warning"}>
@@ -146,17 +146,17 @@ export function SettingsPage() {
             <CardDescription>PyMuPDF · Pandas · Pillow · Tesseract (optional)</CardDescription>
           </CardHeader>
           <CardContent className="space-y-3 text-xs">
-            <div className="flex items-start gap-2 rounded-lg border border-slate-800 bg-[#071026] p-3 text-slate-300">
+            <div className="flex items-start gap-2 rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] p-3 text-[#292820]">
               {health?.ocr_available ? (
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#638568]" />
               ) : (
-                <FileSearch className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
+                <FileSearch className="mt-0.5 h-4 w-4 shrink-0 text-[#D49A45]" />
               )}
               <span>{health?.ocr_message ?? "Checking OCR availability..."}</span>
             </div>
 
             <div>
-              <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+              <div className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-[#77736A]">
                 Supported Formats
               </div>
               <div className="flex flex-wrap gap-1.5">

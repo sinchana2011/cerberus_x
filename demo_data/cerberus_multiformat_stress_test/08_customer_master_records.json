@@ -1,0 +1,55 @@
+{
+  "case": "Project Blackout — Multimodal Evidence Investigation",
+  "records": [
+    {
+      "record_id": "CRM-801",
+      "source": "CRM Master Registry",
+      "entity": "Helios Grid Energy Pvt Ltd",
+      "attribute": "customer_code",
+      "value": "CUST-HG-09",
+      "unit": "",
+      "timestamp": "2026-10-01 09:00",
+      "note": "Canonical customer record; aliases: Helios Grid Limited, Helios Grid Energy, H. Grid Energy"
+    },
+    {
+      "record_id": "CRM-802",
+      "source": "CRM Master Registry",
+      "entity": "Helios Grid Energy",
+      "attribute": "linked_order",
+      "value": "Order ORD-7712",
+      "unit": "",
+      "timestamp": "2026-10-10 10:00",
+      "note": "Alias reference to Helios Grid Energy Pvt Ltd"
+    },
+    {
+      "record_id": "DSP-008",
+      "source": "ERP Dispatch System",
+      "entity": "Order ORD-7712",
+      "attribute": "customer",
+      "value": "Helios Grid Energy Pvt Ltd",
+      "unit": "",
+      "timestamp": "2026-10-10 10:00",
+      "note": "Customer account linked to ORD-7712"
+    },
+    {
+      "record_id": "HIS-803",
+      "source": "Corporate Registry",
+      "entity": "AetherGrid Logistics",
+      "attribute": "role:ceo",
+      "value": "Rohan Kulkarni",
+      "unit": "",
+      "timestamp": "2024-05-01 09:00",
+      "note": "Historical CEO in 2024 prior to March 2025 transition"
+    },
+    {
+      "record_id": "HIS-804",
+      "source": "Corporate Registry",
+      "entity": "AetherGrid Logistics",
+      "attribute": "role:ceo",
+      "value": "Kavya Nair",
+      "unit": "",
+      "timestamp": "2025-03-01 09:00",
+      "note": "Appointed CEO effective 2025-03-01"
+    }
+  ]
+}

@@ -28,25 +28,25 @@ function DocumentNode({ data, selected }: NodeProps) {
   const suspicious = Boolean(data.is_suspicious);
   return (
     <div
-      className={`min-w-[200px] max-w-[240px] rounded-xl border px-3.5 py-2.5 shadow-lg transition ${
+      className={`min-w-[200px] max-w-[240px] rounded-xl border px-3.5 py-2.5 shadow-sm transition ${
         suspicious
-          ? "border-rose-500/70 bg-[#230f1e]"
+          ? "border-[#C65D50] bg-[#FDF5F4]"
           : selected
-          ? "border-cyan-400 bg-[#0f2452]"
-          : "border-blue-500/40 bg-[#0b193b]"
+          ? "border-[#C87620] bg-white ring-2 ring-[#C87620]/25"
+          : "border-[#D9B98C] bg-white"
       }`}
     >
-      <Handle type="source" position={Position.Right} className="!bg-cyan-400" />
-      <div className="flex items-center justify-between gap-2 text-[10px] font-semibold uppercase tracking-wider text-cyan-300">
+      <Handle type="source" position={Position.Right} className="!bg-[#C87620]" />
+      <div className="flex items-center justify-between gap-2 text-[10px] font-semibold uppercase tracking-wider text-[#C87620]">
         <span className="flex items-center gap-1">
           <FileText className="h-3 w-3" /> Document
         </span>
-        {suspicious && <ShieldAlert className="h-3.5 w-3.5 text-rose-400" />}
+        {suspicious && <ShieldAlert className="h-3.5 w-3.5 text-[#C65D50]" />}
       </div>
-      <div className="mt-1 truncate text-xs font-semibold text-white">
+      <div className="mt-1 truncate text-xs font-semibold text-[#292820]">
         {String(data.filename ?? data.label ?? "")}
       </div>
-      <div className="mt-1 text-[10px] text-slate-400">
+      <div className="mt-1 text-[10px] text-[#77736A]">
         {String(data.file_type ?? "").toUpperCase()} · rel{" "}
         {Math.round(Number(data.reliability ?? 0) * 100)}%
       </div>
@@ -58,31 +58,31 @@ function ClaimNode({ data, selected }: NodeProps) {
   const status = String(data.status ?? "unverified");
   const suspicious = Boolean(data.suspicious);
   const borderColor = suspicious
-    ? "border-rose-500/80 bg-[#261121]"
+    ? "border-[#C65D50] bg-[#FDF5F4]"
     : status === "disputed"
-    ? "border-amber-400/70 bg-[#261c0e]"
+    ? "border-[#D49A45] bg-[#FCF7EE]"
     : status === "verified"
-    ? "border-emerald-400/50 bg-[#0a2324]"
-    : "border-purple-400/40 bg-[#141738]";
+    ? "border-[#638568] bg-[#F4F8F5]"
+    : "border-[#E8E4DA] bg-white";
 
   return (
     <div
-      className={`min-w-[210px] max-w-[250px] rounded-xl border px-3.5 py-2.5 shadow-lg ${borderColor} ${
-        selected ? "ring-2 ring-cyan-400" : ""
+      className={`min-w-[210px] max-w-[250px] rounded-xl border px-3.5 py-2.5 shadow-sm ${borderColor} ${
+        selected ? "ring-2 ring-[#C87620]" : ""
       }`}
     >
-      <Handle type="target" position={Position.Left} className="!bg-blue-400" />
-      <Handle type="source" position={Position.Right} className="!bg-purple-400" />
-      <div className="flex items-center justify-between gap-2 text-[10px] font-semibold uppercase tracking-wider text-purple-300">
+      <Handle type="target" position={Position.Left} className="!bg-[#D9B98C]" />
+      <Handle type="source" position={Position.Right} className="!bg-[#C87620]" />
+      <div className="flex items-center justify-between gap-2 text-[10px] font-semibold uppercase tracking-wider text-[#7A5226]">
         <span>Claim</span>
-        <span className="rounded bg-black/30 px-1.5 py-0.5 text-[9px] text-slate-200">
+        <span className="rounded border border-[#E8E4DA] bg-[#F6F5F0] px-1.5 py-0.5 text-[9px] text-[#292820]">
           {status}
         </span>
       </div>
-      <div className="mt-1 truncate text-xs font-semibold text-white">
+      <div className="mt-1 truncate text-xs font-semibold text-[#292820]">
         {String(data.label ?? "")}
       </div>
-      <div className="mt-1 truncate text-[10px] text-slate-400">
+      <div className="mt-1 truncate text-[10px] text-[#77736A]">
         {String(data.entity_name ?? "")} {data.locator ? `· ${String(data.locator)}` : ""}
       </div>
     </div>
@@ -93,21 +93,21 @@ function EntityNode({ data, selected }: NodeProps) {
   const aliases = Array.isArray(data.aliases) ? data.aliases : [];
   return (
     <div
-      className={`min-w-[190px] max-w-[240px] rounded-xl border px-3.5 py-2.5 shadow-lg ${
+      className={`min-w-[190px] max-w-[240px] rounded-xl border px-3.5 py-2.5 shadow-sm ${
         selected
-          ? "border-cyan-400 bg-[#0e2a4a]"
-          : "border-cyan-500/40 bg-[#091f38]"
+          ? "border-[#C87620] bg-white ring-2 ring-[#C87620]/25"
+          : "border-[#638568]/50 bg-[#F4F8F5]"
       }`}
     >
-      <Handle type="target" position={Position.Left} className="!bg-cyan-400" />
-      <div className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-cyan-300">
+      <Handle type="target" position={Position.Left} className="!bg-[#638568]" />
+      <div className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-[#48664D]">
         <Users className="h-3 w-3" /> Entity ({String(data.entity_type ?? "unknown")})
       </div>
-      <div className="mt-1 truncate text-xs font-semibold text-white">
+      <div className="mt-1 truncate text-xs font-semibold text-[#292820]">
         {String(data.label ?? "")}
       </div>
       {aliases.length > 0 && (
-        <div className="mt-1 truncate text-[10px] text-slate-400">
+        <div className="mt-1 truncate text-[10px] text-[#77736A]">
           Aliases: {aliases.join(", ")}
         </div>
       )}
@@ -118,18 +118,18 @@ function EntityNode({ data, selected }: NodeProps) {
 function ConflictNode({ data, selected }: NodeProps) {
   return (
     <div
-      className={`min-w-[200px] max-w-[240px] rounded-xl border border-rose-500/70 bg-[#2b0f1d] px-3.5 py-2.5 shadow-lg ${
-        selected ? "ring-2 ring-cyan-400" : ""
+      className={`min-w-[200px] max-w-[240px] rounded-xl border border-[#C65D50] bg-[#FDF5F4] px-3.5 py-2.5 shadow-sm ${
+        selected ? "ring-2 ring-[#C87620]" : ""
       }`}
     >
-      <Handle type="target" position={Position.Left} className="!bg-rose-400" />
-      <div className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-rose-300">
+      <Handle type="target" position={Position.Left} className="!bg-[#C65D50]" />
+      <div className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-[#A6463B]">
         <AlertTriangle className="h-3 w-3" /> Conflict ({String(data.severity ?? "medium")})
       </div>
-      <div className="mt-1 truncate text-xs font-semibold text-white">
+      <div className="mt-1 truncate text-xs font-semibold text-[#292820]">
         {String(data.label ?? "")}
       </div>
-      <div className="mt-1 truncate text-[10px] text-rose-200/80">
+      <div className="mt-1 truncate text-[10px] text-[#77736A]">
         {String(data.entity_name ?? "")}
       </div>
     </div>
@@ -144,12 +144,12 @@ const NODE_TYPES = {
 };
 
 function edgeColor(relation: string): string {
-  if (relation === "CONTRADICTS" || relation === "CONFLICT_LINK") return "#f43f5e";
-  if (relation === "STAGE_DIFFERENCE") return "#22d3ee";
-  if (relation === "SUPERSEDES") return "#a855f7";
-  if (relation === "COMPATIBLE_WITH") return "#10b981";
-  if (relation === "ABOUT") return "#38bdf8";
-  return "#64748b";
+  if (relation === "CONTRADICTS" || relation === "CONFLICT_LINK") return "#C65D50";
+  if (relation === "STAGE_DIFFERENCE") return "#C87620";
+  if (relation === "SUPERSEDES") return "#D49A45";
+  if (relation === "COMPATIBLE_WITH") return "#638568";
+  if (relation === "ABOUT") return "#8C7A65";
+  return "#77736A";
 }
 
 export function EvidenceGraphPage() {
@@ -223,8 +223,8 @@ export function EvidenceGraphPage() {
         type: "smoothstep",
         animated: e.animated,
         style: { stroke: color, strokeWidth: relation === "CONTRADICTS" ? 2.4 : 1.5 },
-        labelStyle: { fill: "#cbd5e1", fontSize: 10, fontWeight: 600 },
-        labelBgStyle: { fill: "#071026", fillOpacity: 0.85 },
+        labelStyle: { fill: "#292820", fontSize: 10, fontWeight: 600 },
+        labelBgStyle: { fill: "#FFFFFF", fillOpacity: 0.92 },
         markerEnd: { type: MarkerType.ArrowClosed, color },
         data: e.data,
       };
@@ -258,12 +258,12 @@ export function EvidenceGraphPage() {
             type: "smoothstep",
             animated: cf.is_real_problem,
             style: {
-              stroke: cf.is_real_problem ? "#f43f5e" : "#f59e0b",
+              stroke: cf.is_real_problem ? "#C65D50" : "#D49A45",
               strokeWidth: 1.6,
               strokeDasharray: cf.is_real_problem ? undefined : "5 4",
             },
-            labelStyle: { fill: "#fda4af", fontSize: 9 },
-            labelBgStyle: { fill: "#071026", fillOpacity: 0.85 },
+            labelStyle: { fill: cf.is_real_problem ? "#A6463B" : "#94661F", fontSize: 9, fontWeight: 600 },
+            labelBgStyle: { fill: "#FFFFFF", fillOpacity: 0.92 },
             data: { relation: "CONFLICT_LINK", explanation: cf.explanation, rule: cf.rule },
           });
         });
@@ -310,12 +310,12 @@ export function EvidenceGraphPage() {
             <CardContent className="flex flex-wrap items-center justify-between gap-4 p-4">
               <div className="flex flex-wrap items-center gap-2">
                 <div className="relative">
-                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
+                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-[#77736A]" />
                   <input
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     placeholder="Filter entity, claim, file..."
-                    className="h-9 w-56 rounded-lg border border-slate-700 bg-[#071026] pl-9 pr-3 text-xs text-slate-100 outline-none focus:border-cyan-500"
+                    className="h-9 w-56 rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] pl-9 pr-3 text-xs text-[#292820] placeholder:text-[#77736A] outline-none focus:border-[#C87620]"
                   />
                 </div>
 
@@ -333,10 +333,10 @@ export function EvidenceGraphPage() {
                     onClick={() =>
                       setVisibleTypes((prev) => ({ ...prev, [key]: !prev[key] }))
                     }
-                    className={`rounded-lg border px-3 py-1.5 text-xs font-medium transition ${
+                    className={`rounded-[10px] border px-3 py-1.5 text-xs font-medium transition ${
                       visibleTypes[key]
-                        ? "border-cyan-500/40 bg-cyan-500/15 text-cyan-200"
-                        : "border-slate-800 bg-[#071026] text-slate-500"
+                        ? "border-[#C87620]/40 bg-[#C87620]/10 text-[#C87620]"
+                        : "border-[#E8E4DA] bg-[#F6F5F0] text-[#77736A]"
                     }`}
                   >
                     {label}
@@ -345,10 +345,10 @@ export function EvidenceGraphPage() {
               </div>
 
               {graphData && (
-                <div className="flex flex-wrap items-center gap-2 text-xs text-slate-300">
-                  <Badge variant="info">{graphData.statistics.documents} Docs</Badge>
-                  <Badge variant="purple">{graphData.statistics.claims} Claims</Badge>
-                  <Badge variant="default">{graphData.statistics.entities} Entities</Badge>
+                <div className="flex flex-wrap items-center gap-2 text-xs text-[#77736A]">
+                  <Badge variant="default">{graphData.statistics.documents} Docs</Badge>
+                  <Badge variant="info">{graphData.statistics.claims} Claims</Badge>
+                  <Badge variant="success">{graphData.statistics.entities} Entities</Badge>
                   <Badge variant="danger">{graphData.statistics.conflicts} Conflicts</Badge>
                 </div>
               )}
@@ -357,10 +357,10 @@ export function EvidenceGraphPage() {
 
           <div className="grid gap-4 lg:grid-cols-12">
             <Card className={selectedItem ? "lg:col-span-8" : "lg:col-span-12"}>
-              <div className="h-[620px] w-full overflow-hidden rounded-xl bg-[#050b1a]">
+              <div className="h-[620px] w-full overflow-hidden rounded-xl bg-[#F6F5F0]">
                 {loading ? (
-                  <div className="flex h-full items-center justify-center text-sm text-slate-400">
-                    <Network className="mr-2 h-4 w-4 animate-pulse text-cyan-400" />
+                  <div className="flex h-full items-center justify-center text-sm text-[#77736A]">
+                    <Network className="mr-2 h-4 w-4 animate-pulse text-[#C87620]" />
                     Loading evidence graph...
                   </div>
                 ) : (
@@ -392,19 +392,19 @@ export function EvidenceGraphPage() {
                     minZoom={0.2}
                     maxZoom={1.8}
                   >
-                    <Background color="#1e293b" gap={20} />
+                    <Background color="#D9B98C" gap={20} />
                     <Controls />
                     <MiniMap
                       nodeColor={(n) =>
                         n.type === "conflict"
-                          ? "#f43f5e"
+                          ? "#C65D50"
                           : n.type === "document"
-                          ? "#3b82f6"
+                          ? "#C87620"
                           : n.type === "entity"
-                          ? "#22d3ee"
-                          : "#a855f7"
+                          ? "#638568"
+                          : "#D49A45"
                       }
-                      maskColor="rgba(6, 13, 31, 0.75)"
+                      maskColor="rgba(246, 245, 240, 0.72)"
                     />
                   </ReactFlow>
                 )}
@@ -413,15 +413,15 @@ export function EvidenceGraphPage() {
 
             {selectedItem && (
               <Card className="lg:col-span-4">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 border-b border-slate-800 pb-3">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 border-b border-[#E8E4DA] pb-3">
                   <div className="flex items-center gap-2">
-                    <GitBranch className="h-4 w-4 text-cyan-400" />
+                    <GitBranch className="h-4 w-4 text-[#C87620]" />
                     <CardTitle className="truncate">{selectedItem.title}</CardTitle>
                   </div>
                   <button
                     type="button"
                     onClick={() => setSelectedItem(null)}
-                    className="rounded p-1 text-slate-400 hover:bg-slate-800 hover:text-white"
+                    className="rounded-lg p-1 text-[#77736A] hover:bg-[#F6F5F0] hover:text-[#292820]"
                     aria-label="Close inspector"
                   >
                     <X className="h-4 w-4" />
@@ -434,12 +434,12 @@ export function EvidenceGraphPage() {
                     return (
                       <div
                         key={k}
-                        className="rounded-lg border border-slate-800 bg-[#071026] px-3 py-2"
+                        className="rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] px-3 py-2"
                       >
-                        <div className="text-[10px] uppercase tracking-wider text-slate-500">
+                        <div className="text-[10px] uppercase tracking-wider text-[#77736A]">
                           {k.replace(/_/g, " ")}
                         </div>
-                        <div className="mt-0.5 break-words font-mono text-slate-200">
+                        <div className="mt-0.5 break-words font-mono text-[#292820]">
                           {Array.isArray(v) ? v.join(", ") || "—" : String(v)}
                         </div>
                       </div>

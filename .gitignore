@@ -1,22 +1,10 @@
-<<<<<<< HEAD
 ﻿.venv/
-=======
-
-.venv/
->>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
 venv/
 __pycache__/
 *.pyc
 .env
-<<<<<<< HEAD
 node_modules/
 dist/
 build/
 .pytest_cache/
-=======
-.env.*
-!.env.example
-.DS_Store
-.idea/
->>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
 .vscode/

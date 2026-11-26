@@ -17,14 +17,14 @@ export function PlaceholderPage({
     <div className="space-y-4">
       <Card>
         <CardHeader>
-          <div className="flex items-center gap-2 text-blue-700">
+          <div className="flex items-center gap-2 text-[#C87620]">
             <Construction className="h-5 w-5" />
             <CardTitle className="text-lg">{title}</CardTitle>
           </div>
           <CardDescription>{description}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <p className="text-sm text-slate-600">{batchNote}</p>
+          <p className="text-sm text-[#77736A]">{batchNote}</p>
           <Button asChild variant="outline" size="sm">
             <Link to="/">
               <ArrowLeft className="h-4 w-4" />

@@ -1,0 +1,96 @@
+{
+  "case": "Project Blackout — Multimodal Evidence Investigation",
+  "system": "AetherGrid ERP v4.2",
+  "records": [
+    {
+      "record_id": "ERP-701",
+      "source": "ERP Audit Trail",
+      "entity": "Order ORD-7712",
+      "attribute": "quantity_ordered",
+      "value": "750",
+      "unit": "units",
+      "timestamp": "2026-10-10 10:00",
+      "note": "Approved purchase order for 750 units"
+    },
+    {
+      "record_id": "ERP-702",
+      "source": "ERP Audit Trail",
+      "entity": "Shipment SHP-2048",
+      "attribute": "location",
+      "value": "Hyderabad",
+      "unit": "",
+      "timestamp": "2026-10-14 11:00",
+      "note": "Customs EDI pinged SHP-2048 in Hyderabad at 11:00"
+    },
+    {
+      "record_id": "ERP-703",
+      "source": "ERP Audit Trail",
+      "entity": "Order ORD-7712",
+      "attribute": "payment_amount",
+      "value": "620000",
+      "unit": "INR",
+      "timestamp": "2026-10-15 14:00",
+      "note": "Revised freight settlement INR 6,20,000 (₹6,20,000)"
+    },
+    {
+      "record_id": "ERP-704",
+      "source": "ERP Audit Trail",
+      "entity": "Order ORD-7712",
+      "attribute": "invoice_status",
+      "value": "unpaid",
+      "unit": "",
+      "timestamp": "2026-10-15 16:30",
+      "note": "Accounts receivable still flags ORD-7712 as unpaid"
+    },
+    {
+      "record_id": "ERP-705",
+      "source": "ERP Audit Trail",
+      "entity": "Warehouse WH-03",
+      "attribute": "capacity",
+      "value": "850",
+      "unit": "pallets",
+      "timestamp": "2026-10-13 10:00",
+      "note": "ERP zoning table restricts WH-03 to 850 pallets"
+    },
+    {
+      "record_id": "ERP-706",
+      "source": "ERP Audit Trail",
+      "entity": "Warehouse WH-03",
+      "attribute": "inventory_count",
+      "value": "80",
+      "unit": "units",
+      "timestamp": "2026-10-14 16:00",
+      "note": "Post-blackout cycle count shows 80 units"
+    },
+    {
+      "record_id": "ERP-707",
+      "source": "ERP Audit Trail",
+      "entity": "Arjun Rao",
+      "attribute": "employee_assignment",
+      "value": "Logistics Manager",
+      "unit": "",
+      "timestamp": "2026-10-14 09:00",
+      "note": "Active HR assignment: Logistics Manager"
+    },
+    {
+      "record_id": "ERP-708",
+      "source": "ERP Audit Trail",
+      "entity": "AetherGrid Logistics",
+      "attribute": "role:operations_director",
+      "value": "Meera Das",
+      "unit": "",
+      "timestamp": "2026-10-14 09:00",
+      "note": "Active directory lists Meera Das as Operations Director"
+    },
+    {
+      "record_id": "ERP-709",
+      "source": "ERP Audit Trail",
+      "entity": "AetherGrid Logistics",
+      "attribute": "role:finance_controller",
+      "value": "Kavya Nair",
+      "unit": "",
+      "timestamp": "2026-10-14 09:00",
+      "note": "Active directory lists Kavya Nair as Finance Controller"
+    }
+  ]
+}

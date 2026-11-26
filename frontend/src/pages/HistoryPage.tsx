@@ -89,8 +89,8 @@ export function HistoryPage() {
         ].map(([label, val]) => (
           <Card key={String(label)}>
             <CardContent className="p-4">
-              <div className="text-xs text-slate-400">{label}</div>
-              <div className="mt-1 text-2xl font-bold text-cyan-300">{val}</div>
+              <div className="text-xs text-[#77736A]">{label}</div>
+              <div className="mt-1 text-2xl font-bold text-[#C87620]">{val}</div>
             </CardContent>
           </Card>
         ))}
@@ -100,19 +100,19 @@ export function HistoryPage() {
         <CardHeader className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <CardTitle className="flex items-center gap-2">
-              <Database className="h-4 w-4 text-cyan-400" />
+              <Database className="h-4 w-4 text-[#C87620]" />
               Saved SQLite Investigations ({filtered.length})
             </CardTitle>
             <CardDescription>Persisted across backend and browser restarts</CardDescription>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <div className="relative">
-              <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
+              <Search className="absolute left-3 top-2.5 h-4 w-4 text-[#77736A]" />
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search analysis ID..."
-                className="h-9 w-48 rounded-lg border border-slate-700 bg-[#071026] pl-9 pr-3 text-xs text-white outline-none focus:border-cyan-500"
+                className="h-9 w-48 rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] pl-9 pr-3 text-xs text-[#292820] placeholder:text-[#77736A] outline-none focus:border-[#C87620]"
               />
             </div>
             <input
@@ -120,7 +120,7 @@ export function HistoryPage() {
               aria-label="Filter by date"
               value={dateFilter}
               onChange={(e) => setDateFilter(e.target.value)}
-              className="h-9 rounded-lg border border-slate-700 bg-[#071026] px-3 text-xs text-slate-200 outline-none focus:border-cyan-500"
+              className="h-9 rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0] px-3 text-xs text-[#292820] outline-none focus:border-[#C87620]"
             />
             {dateFilter && (
               <Button variant="ghost" size="sm" onClick={() => setDateFilter("")}>
@@ -132,7 +132,7 @@ export function HistoryPage() {
 
         <CardContent>
           {filtered.length === 0 ? (
-            <div className="py-10 text-center text-sm text-slate-400">
+            <div className="py-10 text-center text-sm text-[#77736A]">
               No SQLite investigations match your filter.
             </div>
           ) : (
@@ -155,13 +155,13 @@ export function HistoryPage() {
                     <TableRow key={item.analysis_id}>
                       <TableCell>
                         <div className="flex items-center gap-2">
-                          <span className="font-mono text-xs font-semibold text-cyan-300">
+                          <span className="font-mono text-xs font-semibold text-[#C87620]">
                             {item.analysis_id}
                           </span>
                           {isActive && <Badge variant="default">Active</Badge>}
                         </div>
                       </TableCell>
-                      <TableCell className="font-mono text-xs text-slate-400">
+                      <TableCell className="font-mono text-xs text-[#77736A]">
                         {item.created_at.replace("T", " ").slice(0, 19)}
                       </TableCell>
                       <TableCell>{item.counts.documents}</TableCell>
@@ -206,7 +206,7 @@ export function HistoryPage() {
                               onClick={() => setConfirmDeleteId(item.analysis_id)}
                               aria-label={`Delete ${item.analysis_id}`}
                             >
-                              <Trash2 className="h-3.5 w-3.5 text-rose-400" />
+                              <Trash2 className="h-3.5 w-3.5 text-[#C65D50]" />
                             </Button>
                           )}
                         </div>

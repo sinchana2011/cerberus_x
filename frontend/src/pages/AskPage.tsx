@@ -90,7 +90,7 @@ export function AskPage() {
         <NoAnalysisEmptyState />
       ) : (
         <>
-          <Card className="border-cyan-500/20">
+          <Card className="border-[#E8E4DA]">
             <CardHeader className="pb-3">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
@@ -103,13 +103,13 @@ export function AskPage() {
                 <button
                   type="button"
                   onClick={() => setUseLlm((v) => !v)}
-                  className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-medium transition ${
+                  className={`flex items-center gap-2 rounded-[10px] border px-3 py-2 text-xs font-medium transition ${
                     useLlm
-                      ? "border-purple-400/60 bg-purple-500/15 text-purple-200"
-                      : "border-slate-700 bg-[#071026] text-slate-300"
+                      ? "border-[#C87620]/50 bg-[#C87620]/10 text-[#A85F15]"
+                      : "border-[#E8E4DA] bg-[#F6F5F0] text-[#77736A] hover:text-[#292820]"
                   }`}
                 >
-                  <Sparkles className="h-3.5 w-3.5 text-purple-400" />
+                  <Sparkles className="h-3.5 w-3.5 text-[#C87620]" />
                   <span>
                     Ollama ({health?.ollama_model ?? "llama3.2:3b"}):{" "}
                     {useLlm ? "Enabled" : "Deterministic Only"}
@@ -121,7 +121,7 @@ export function AskPage() {
             <CardContent className="space-y-4">
               {useLlm && !ollamaReady && (
                 <Alert variant="warning">
-                  <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
+                  <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-[#D49A45]" />
                   <div className="text-xs">
                     Local Ollama server ({health?.ollama_model ?? "llama3.2:3b"}) is currently offline.
                     CERBERUS-X will automatically fall back to deterministic evidence reasoning.
@@ -141,7 +141,7 @@ export function AskPage() {
                   onChange={(e) => setQuestion(e.target.value)}
                   placeholder="Ask about quantities, leadership timelines, locations, or contradictions..."
                   disabled={loading}
-                  className="h-11 flex-1 rounded-xl border border-slate-700 bg-[#071026] px-4 text-sm text-white outline-none focus:border-cyan-500"
+                  className="h-11 flex-1 rounded-xl border border-[#E8E4DA] bg-[#F6F5F0] px-4 text-sm text-[#292820] placeholder:text-[#77736A] outline-none focus:border-[#C87620]"
                 />
                 <Button type="submit" disabled={!question.trim() || loading} className="h-11 px-6">
                   <Send className="h-4 w-4" />
@@ -157,7 +157,7 @@ export function AskPage() {
                       type="button"
                       disabled={loading}
                       onClick={() => void submitQuestion(sq)}
-                      className="rounded-full border border-slate-700/80 bg-[#071026] px-3 py-1.5 text-xs text-slate-300 transition hover:border-cyan-500/40 hover:text-cyan-200"
+                      className="rounded-full border border-[#E8E4DA] bg-[#F6F5F0] px-3 py-1.5 text-xs text-[#292820] transition hover:border-[#C87620] hover:text-[#C87620]"
                     >
                       {sq}
                     </button>
@@ -177,8 +177,8 @@ export function AskPage() {
           {/* Answers */}
           <div className="space-y-4">
             {responses.map((res, idx) => (
-              <Card key={idx} className="animate-fade-in border-slate-800">
-                <CardHeader className="border-b border-slate-800/80 pb-3">
+              <Card key={idx} className="animate-fade-in">
+                <CardHeader className="border-b border-[#E8E4DA] pb-3">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <CardTitle className="text-base">{res.question}</CardTitle>
                     <div className="flex flex-wrap items-center gap-2">
@@ -193,7 +193,7 @@ export function AskPage() {
                       <Badge variant="default">
                         Strength: {Math.round(res.confidence * 100)}%
                       </Badge>
-                      <Badge variant={res.used_llm ? "purple" : "neutral"}>
+                      <Badge variant={res.used_llm ? "info" : "neutral"}>
                         <BrainCircuit className="h-3 w-3" />
                         {res.used_llm ? `Ollama (${res.model})` : "Deterministic"}
                       </Badge>
@@ -202,11 +202,11 @@ export function AskPage() {
                 </CardHeader>
 
                 <CardContent className="space-y-4 pt-4">
-                  <p className="text-sm leading-relaxed text-slate-100">{res.answer_text}</p>
+                  <p className="text-sm leading-relaxed text-[#292820]">{res.answer_text}</p>
 
                   {res.excluded_claim_ids.length > 0 && (
                     <Alert variant="warning">
-                      <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0" />
+                      <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0 text-[#D49A45]" />
                       <div className="text-xs">
                         Excluded suspicious claim(s) from factual reasoning:{" "}
                         <span className="font-mono">{res.excluded_claim_ids.join(", ")}</span>
@@ -216,17 +216,17 @@ export function AskPage() {
 
                   {res.citations.length > 0 && (
                     <div className="space-y-2">
-                      <div className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                      <div className="text-[11px] font-semibold uppercase tracking-wider text-[#77736A]">
                         Supporting Citations ({res.citations.length})
                       </div>
                       <div className="grid gap-2.5 md:grid-cols-2">
                         {res.citations.map((cit, cIdx) => (
                           <div
                             key={cIdx}
-                            className="rounded-lg border border-slate-800 bg-[#071026] p-3 text-xs"
+                            className="rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0]/70 p-3 text-xs"
                           >
                             <div className="flex items-center justify-between gap-2">
-                              <span className="flex items-center gap-1.5 font-semibold text-cyan-300">
+                              <span className="flex items-center gap-1.5 font-semibold text-[#C87620]">
                                 <FileText className="h-3.5 w-3.5" />
                                 {cit.filename}
                               </span>
@@ -234,11 +234,11 @@ export function AskPage() {
                                 Rel {Math.round(cit.reliability * 100)}%
                               </Badge>
                             </div>
-                            <div className="mt-1 font-mono text-[11px] text-slate-400">
+                            <div className="mt-1 font-mono text-[11px] text-[#77736A]">
                               {cit.locator ?? "Unknown locator"}
                               {cit.claim_id ? ` · ${cit.claim_id}` : ""}
                             </div>
-                            <p className="mt-2 rounded bg-black/30 p-2 text-[11px] text-slate-300">
+                            <p className="mt-2 rounded-lg border border-[#E8E4DA] bg-white p-2 text-[11px] text-[#292820]">
                               {cit.snippet}
                             </p>
                           </div>
@@ -248,18 +248,18 @@ export function AskPage() {
                   )}
 
                   {res.conflict_ids.length > 0 && (
-                    <div className="text-xs text-rose-300">
+                    <div className="text-xs font-medium text-[#A6463B]">
                       Related Conflict IDs:{" "}
                       <span className="font-mono">{res.conflict_ids.join(", ")}</span>
                     </div>
                   )}
 
                   {res.notes.length > 0 && (
-                    <div className="rounded-lg border border-slate-800 bg-[#071026]/80 p-3">
-                      <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                    <div className="rounded-[10px] border border-[#E8E4DA] bg-[#F6F5F0]/70 p-3">
+                      <div className="text-[10px] font-semibold uppercase tracking-wider text-[#77736A]">
                         Reasoning Notes
                       </div>
-                      <ul className="mt-1.5 list-disc space-y-1 pl-4 text-xs text-slate-300">
+                      <ul className="mt-1.5 list-disc space-y-1 pl-4 text-xs text-[#292820]">
                         {res.notes.map((n, nIdx) => (
                           <li key={nIdx}>{n}</li>
                         ))}
