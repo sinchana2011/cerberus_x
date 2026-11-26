@@ -20,19 +20,13 @@ from __future__ import annotations
 import codecs
 import hashlib
 import io
-<<<<<<< HEAD
 import json
-=======
->>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
 import logging
 import os
 import re
 import shutil
-<<<<<<< HEAD
 import xml.etree.ElementTree as ET
 import zipfile
-=======
->>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
@@ -53,11 +47,8 @@ EXTENSION_TYPES: dict[str, FileType] = {
     ".bmp": FileType.IMAGE, ".tif": FileType.IMAGE, ".tiff": FileType.IMAGE,
     ".gif": FileType.IMAGE, ".webp": FileType.IMAGE,
     ".csv": FileType.CSV,
-<<<<<<< HEAD
     ".xlsx": FileType.EXCEL, ".xls": FileType.EXCEL,
     ".json": FileType.JSON,
-=======
->>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
     ".txt": FileType.TEXT, ".md": FileType.TEXT, ".log": FileType.TEXT,
 }
 
@@ -250,7 +241,6 @@ def _parse_text(path: Path, enable_ocr: bool) -> _Parsed:
                    warnings=warnings, method="text-decode")
 
 
-<<<<<<< HEAD
 def _dataframe_to_segments(
     df: pd.DataFrame,
     *,
@@ -282,8 +272,6 @@ def _dataframe_to_segments(
     return segments
 
 
-=======
->>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
 def _parse_csv(path: Path, enable_ocr: bool) -> _Parsed:
     text, encoding, warnings = _decode_bytes(path.read_bytes())
     if not text.strip():
@@ -296,22 +284,7 @@ def _parse_csv(path: Path, enable_ocr: bool) -> _Parsed:
     except pd.errors.ParserError as exc:
         raise _ExtractionError(f"CSV could not be parsed: {exc}") from exc
     df.columns = [str(c).strip() for c in df.columns]
-<<<<<<< HEAD
     segments = _dataframe_to_segments(df, warnings=warnings)
-=======
-    if len(df) > MAX_CSV_ROWS:
-        df = df.iloc[:MAX_CSV_ROWS]
-        warnings.append(f"CSV truncated to the first {MAX_CSV_ROWS} rows.")
-    segments: list[TextSegment] = []
-    for idx, record in enumerate(df.to_dict(orient="records")):
-        fields = {str(k).strip(): str(v).strip() for k, v in record.items()}
-        if not any(fields.values()):
-            continue
-        row_no = idx + 2  # header is row 1
-        row_text = "; ".join(f"{k}={v}" for k, v in fields.items() if v)
-        segments.append(TextSegment(text=row_text, kind=SegmentKind.ROW,
-                                    locator=f"row {row_no}", row=row_no, fields=fields))
->>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
     if not segments:
         warnings.append("CSV has a header but no data rows.")
     meta = {"encoding": encoding, "csv_columns": ", ".join(df.columns),
@@ -320,7 +293,6 @@ def _parse_csv(path: Path, enable_ocr: bool) -> _Parsed:
                    metadata=meta, warnings=warnings, method="pandas")
 
 
-<<<<<<< HEAD
 def _col_ref_to_index(ref: str) -> int:
     """Convert an Excel cell reference such as 'AB12' into a 0-based column index."""
     col = 0
@@ -547,8 +519,6 @@ def _parse_json(path: Path, enable_ocr: bool) -> _Parsed:
     )
 
 
-=======
->>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
 # --------------------------------------------------------------------------- #
 # Image
 # --------------------------------------------------------------------------- #
@@ -800,11 +770,8 @@ _HANDLERS = {
     FileType.PDF: (_parse_pdf, SourceType.OFFICIAL_DOCUMENT),
     FileType.IMAGE: (_parse_image, SourceType.OCR_IMAGE),
     FileType.CSV: (_parse_csv, SourceType.SYSTEM_EXPORT),
-<<<<<<< HEAD
     FileType.EXCEL: (_parse_excel, SourceType.SYSTEM_EXPORT),
     FileType.JSON: (_parse_json, SourceType.SYSTEM_EXPORT),
-=======
->>>>>>> 4682e39edabba11574378524c8a1f84a103cb8cf
     FileType.TEXT: (_parse_text, SourceType.FREEFORM_NOTE),
 }
 
